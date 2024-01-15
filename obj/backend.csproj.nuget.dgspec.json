@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/AmundFremming/Documents/Personlig/Prosjekter/Frug/backend/backend.csproj": {}
+    "/Users/AmundFremming/Documents/Personlig/Prosjekter/Spike-backend/backend.csproj": {}
   },
   "projects": {
-    "/Users/AmundFremming/Documents/Personlig/Prosjekter/Frug/backend/backend.csproj": {
+    "/Users/AmundFremming/Documents/Personlig/Prosjekter/Spike-backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/AmundFremming/Documents/Personlig/Prosjekter/Frug/backend/backend.csproj",
+        "projectUniqueName": "/Users/AmundFremming/Documents/Personlig/Prosjekter/Spike-backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/AmundFremming/Documents/Personlig/Prosjekter/Frug/backend/backend.csproj",
+        "projectPath": "/Users/AmundFremming/Documents/Personlig/Prosjekter/Spike-backend/backend.csproj",
         "packagesPath": "/Users/AmundFremming/.nuget/packages/",
-        "outputPath": "/Users/AmundFremming/Documents/Personlig/Prosjekter/Frug/backend/obj/",
+        "outputPath": "/Users/AmundFremming/Documents/Personlig/Prosjekter/Spike-backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/AmundFremming/.nuget/NuGet/NuGet.Config"
