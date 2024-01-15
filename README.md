@@ -19,3 +19,4 @@
 ### Hva skal jeg gjøre annerledes neste gang
 
 - **Fyll ut når ferdig**
+  H
