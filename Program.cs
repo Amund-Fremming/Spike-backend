@@ -16,7 +16,6 @@ var databaseConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONN
 builder.Services.AddDbContext<Data.AppDbContext>(options =>
 {
     options.UseNpgsql(databaseConnectionString);
-    // options.UseNpgsql(builder.Configuration.GetConnectionString("DATABASE_CONNECTION_STRING"));
 });
 
 var app = builder.Build();
@@ -24,6 +23,9 @@ var app = builder.Build();
 // Does not enable Swagger for production
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+} else {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
