@@ -61,3 +61,5 @@ jobs:
           app-name: "Trike"
           slot-name: "production"
           package: .
+        env:
+          CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
