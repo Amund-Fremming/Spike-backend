@@ -28,3 +28,4 @@ az ad sp create-for-rbac --name Trike --role contributor --scopes /subscriptions
 "password": "-Am8Q~HUoScEQejB5.6pYteSdmknXvipOMrxEaVv",
 "tenant": "dacc165a-4ed8-477c-8012-3f3c5d9bccd8"
 }
+s
