@@ -19,4 +19,12 @@
 ### Hva skal jeg gjøre annerledes neste gang
 
 - **Fyll ut når ferdig**
-  H
+
+az ad sp create-for-rbac --name Trike --role contributor --scopes /subscriptions/b7d995c5-0b85-4a5e-b531-c285c8d1339d/resourceGroups/Trike_group
+
+{
+"appId": "827eede4-c56c-4ed5-8507-3c7bac85795d",
+"displayName": "Trike",
+"password": "-Am8Q~HUoScEQejB5.6pYteSdmknXvipOMrxEaVv",
+"tenant": "dacc165a-4ed8-477c-8012-3f3c5d9bccd8"
+}
