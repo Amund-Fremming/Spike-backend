@@ -5,7 +5,7 @@ using Repository;
 
 namespace backend;
 
-[Route("frug")]
+[Route("spike")]
 [ApiController]
 public class Controller : ControllerBase
 {
