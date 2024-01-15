@@ -12,9 +12,10 @@ builder.Services.AddScoped<QuestionRepo>();
 // TODO
 
 // Connects to database
+var databaseConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 builder.Services.AddDbContext<Data.AppDbContext>(options =>
 {
-    options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING"));
+    options.UseNpgsql(databaseConnectionString);
     // options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
