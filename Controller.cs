@@ -19,36 +19,36 @@ public class Controller : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetGameQuestions([FromQuery] string gameId)
     {
-        int gameIdAsInteger;
+        string gameIdEscaped;
         try
         {
-            gameIdAsInteger = int.Parse(gameId);
+            gameIdEscaped = HttpUtility.HtmlEncode(gameId);
         }
         catch(Exception e)
         {
             return BadRequest(e.Message);
         }
 
-        var questions = await _repo.GetGameQuestionsAsync(gameIdAsInteger);
+        var questions = await _repo.GetGameQuestionsAsync(gameIdEscaped);
         return Ok(questions);
     }
 
     [HttpPost]
     public async Task<ActionResult> AddQuestion([FromQuery] string question, [FromQuery] string gameId)
     {
-        int gameIdAsInteger;
-        string validatedString;
+        string gameIdEscaped;
+        string questionEscaped;
         try
         {
-            gameIdAsInteger = int.Parse(gameId);
-            validatedString = HttpUtility.HtmlEncode(question);
+            gameIdEscaped = HttpUtility.HtmlEncode(gameId);
+            questionEscaped = HttpUtility.HtmlEncode(question);
         }
         catch(Exception e)
         {
             return BadRequest(e.Message);
         }
 
-        Question Question = new Question(gameIdAsInteger, validatedString);
+        Question Question = new Question(gameIdEscaped, questionEscaped);
         await _repo.AddQuestionAsyncTransaction(Question);
 
         return Ok("Question added!");

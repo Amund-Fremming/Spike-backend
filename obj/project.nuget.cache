@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XDHISrdfUZ8Bn9wOqFKBFo4rb8eJwT4GVHO9C29mlIhhwk58rH/jNCxiIlHSkyMlEnqqB6c4A8pb7nm+k0hlDQ==",
+  "dgSpecHash": "ZdAeLgEZ7oby+UiO5/iM5BIYGSWtScYYhcZ2ieyau7ves8kIKxQ36O94f/J6bqhL1iV9p+YV0GccK9+wJSxxaA==",
   "success": true,
-  "projectFilePath": "/Users/AmundFremming/Documents/Personlig/Prosjekter/Spike-backend/backend.csproj",
+  "projectFilePath": "/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/backend.csproj",
   "expectedPackageFiles": [
     "/Users/AmundFremming/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/AmundFremming/.nuget/packages/microsoft.aspnetcore.openapi/8.0.0/microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",

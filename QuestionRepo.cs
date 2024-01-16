@@ -13,7 +13,7 @@ public class QuestionRepo
         _context = context;
     }
 
-    public async Task<List<Question>> GetGameQuestionsAsync(int gameId)
+    public async Task<List<Question>> GetGameQuestionsAsync(string gameId)
     {
         return await _context.Questions.Where(q => q.GameId == gameId).ToListAsync();
     }   
