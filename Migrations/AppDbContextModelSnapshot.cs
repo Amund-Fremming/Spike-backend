@@ -29,8 +29,9 @@ namespace backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("GameId")
-                        .HasColumnType("integer");
+                    b.Property<string>("GameId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("QuestionStr")
                         .IsRequired()
