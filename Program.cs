@@ -15,9 +15,9 @@ builder.Services.AddScoped<QuestionRepo>();
 var databaseConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 builder.Services.AddDbContext<Data.AppDbContext>(options =>
 {
-    // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
-    // options.UseNpgsql(connectionString);
-    options.UseNpgsql(databaseConnectionString);
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
+    options.UseNpgsql(connectionString);
+    // options.UseNpgsql(databaseConnectionString);
 });
 
 var app = builder.Build();

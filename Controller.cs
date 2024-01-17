@@ -5,8 +5,8 @@ using Repository;
 
 namespace backend;
 
-[Route("spike")]
 [ApiController]
+[Route("spike")]
 public class Controller : ControllerBase
 {
     public readonly QuestionRepo _repo;
@@ -34,22 +34,18 @@ public class Controller : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> AddQuestion([FromQuery] string question, [FromQuery] string gameId)
+    public async Task<ActionResult> AddQuestion([FromBody] Question question)
     {
-        string gameIdEscaped;
-        string questionEscaped;
         try
         {
-            gameIdEscaped = HttpUtility.HtmlEncode(gameId);
-            questionEscaped = HttpUtility.HtmlEncode(question);
+            // Sanitice input
         }
         catch(Exception e)
         {
             return BadRequest(e.Message);
         }
 
-        Question Question = new Question(gameIdEscaped, questionEscaped);
-        await _repo.AddQuestionAsyncTransaction(Question);
+        await _repo.AddQuestionAsyncTransaction(question);
 
         return Ok("Question added!");
     }
