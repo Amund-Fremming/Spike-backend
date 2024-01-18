@@ -2,6 +2,7 @@ using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Repository;
+using System.Security;
 
 namespace backend;
 
@@ -19,33 +20,37 @@ public class Controller : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetGameQuestions([FromQuery] string gameId)
     {
-        string gameIdEscaped;
+        string gameIdSaniticed;
         try
         {
-            gameIdEscaped = HttpUtility.HtmlEncode(gameId);
+            gameIdSaniticed = SecurityElement.Escape(gameId);
         }
         catch(Exception e)
         {
             return BadRequest(e.Message);
         }
 
-        var questions = await _repo.GetGameQuestionsAsync(gameIdEscaped);
+        var questions = await _repo.GetGameQuestionsAsync(gameIdSaniticed);
         return Ok(questions);
     }
 
     [HttpPost]
     public async Task<ActionResult> AddQuestion([FromBody] Question question)
     {
+        string gameIdEscaped;
+        string questionStringEscaped;
         try
         {
-            // Sanitice input
+            gameIdEscaped = SecurityElement.Escape(question.GameId);
+            questionStringEscaped = SecurityElement.Escape(question.QuestionStr);
         }
         catch(Exception e)
         {
             return BadRequest(e.Message);
         }
 
-        await _repo.AddQuestionAsyncTransaction(question);
+        Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
+        await _repo.AddQuestionAsyncTransaction(saniticedQuestion);
 
         return Ok("Question added!");
     }
