@@ -316,3 +316,7 @@
 /Users/AmundFremming/Personlig/Prosjekter/Spike-backend/obj/Debug/net8.0/backend.pdb
 /Users/AmundFremming/Personlig/Prosjekter/Spike-backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 /Users/AmundFremming/Personlig/Prosjekter/Spike-backend/obj/Debug/net8.0/ref/backend.dll
+/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/Microsoft.AspNetCore.Connections.Abstractions.dll
+/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/Microsoft.AspNetCore.SignalR.Common.dll
+/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/Microsoft.Extensions.Features.dll
+/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/Microsoft.Extensions.Options.dll

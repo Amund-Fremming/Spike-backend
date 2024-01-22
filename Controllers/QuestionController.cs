@@ -1,10 +1,9 @@
-using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Model;
-using Repository;
+using Repositories;
 using System.Security;
 
-namespace backend;
+namespace Controllers;
 
 [ApiController]
 [Route("spike")]
@@ -53,5 +52,12 @@ public class Controller : ControllerBase
         await _repo.AddQuestionAsyncTransaction(saniticedQuestion);
 
         return Ok("Question added!");
+    }
+
+    [HttpGet("/num")]
+    public async Task<ActionResult> GetNumberOfQuestions([FromQuery] string gameId)
+    {
+        var num = await _repo.GetNumberOfQuestions(gameId);
+        return Ok(num);
     }
 }

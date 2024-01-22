@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Repository;
+using Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,17 +7,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddScoped<QuestionRepo>();
-
-// Addds repository and service
-// TODO
+builder.Services.AddSignalR();
 
 // Connects to database
 var databaseConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 builder.Services.AddDbContext<Data.AppDbContext>(options =>
 {
-    // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
-    // options.UseNpgsql(connectionString);     // For testing locally
-    options.UseNpgsql(databaseConnectionString);
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
+    options.UseNpgsql(connectionString);     // For testing locally
+    // options.UseNpgsql(databaseConnectionString);
 });
 
 var app = builder.Build();
