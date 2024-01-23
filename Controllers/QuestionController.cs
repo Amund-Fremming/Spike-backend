@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Model;
 using Repositories;
 using System.Security;
+using Hubs;
 
 namespace Controllers;
 
@@ -10,10 +12,12 @@ namespace Controllers;
 public class Controller : ControllerBase
 {
     public readonly QuestionRepo _repo;
+    public readonly IHubContext<GameHub> _hubContext;
 
-    public Controller(QuestionRepo repo)
+    public Controller(QuestionRepo repo, IHubContext<GameHub> hubContext)
     {
         _repo = repo;
+        _hubContext = hubContext;
     }
 
     [HttpGet]
@@ -51,13 +55,16 @@ public class Controller : ControllerBase
         Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
         await _repo.AddQuestionAsyncTransaction(saniticedQuestion);
 
+        var count = _repo.GetNumberOfQuestions(question.GameId);
+        await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);
+
         return Ok("Question added!");
     }
 
     [HttpGet("/num")]
     public async Task<ActionResult> GetNumberOfQuestions([FromQuery] string gameId)
     {
-        var num = await _repo.GetNumberOfQuestions(gameId);
+        var num = _repo.GetNumberOfQuestions(gameId);
         return Ok(num);
     }
 }

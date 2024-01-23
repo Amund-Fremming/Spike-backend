@@ -42,15 +42,8 @@ public class QuestionRepo
         }
     }
 
-    public async Task<int> GetNumberOfQuestions(string gameId)
+    public int GetNumberOfQuestions(string gameId)
     {
-        try {
-            return await _context.Questions
-                .Where(q => q.GameId == gameId)
-                .CountAsync();
-        } catch (Exception e)
-        {
-            throw new Exception(e.Message);
-        }
+        return _context.Questions.Count(q => q.GameId == gameId);
     }
 }

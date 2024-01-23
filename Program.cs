@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddScoped<QuestionRepo>();
+
 builder.Services.AddSignalR();
 
 // Connects to database
@@ -33,5 +35,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapHub<GameHub>("/gamehub");
 
 app.Run();

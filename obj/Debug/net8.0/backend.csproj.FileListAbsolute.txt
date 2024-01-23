@@ -320,3 +320,5 @@
 /Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/Microsoft.AspNetCore.SignalR.Common.dll
 /Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/Microsoft.Extensions.Features.dll
 /Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/libman.json
+/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/bin/Debug/net8.0/backend.staticwebassets.runtime.json

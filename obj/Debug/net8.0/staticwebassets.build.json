@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "7/yvsnDRTixX0vVer35KSjS1HzfM4rGxA/gc1emwSdw=",
+  "Hash": "cSKsCOiDIKHEZIoZnMEVka4QkTsL3hjQ2QCuxLtaNLI=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "backend/wwwroot",
+      "Source": "backend",
+      "ContentRoot": "/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/wwwroot/js/signalr/dist/browser/signalr.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "js/signalr/dist/browser/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/signalr/dist/browser/signalr.js"
+    }
+  ]
 }
