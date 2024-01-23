@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240116180437_InitialCreate")]
+    [Migration("20240123180150_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,11 +33,9 @@ namespace backend.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("GameId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("QuestionStr")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

@@ -17,8 +17,8 @@ namespace backend.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    GameId = table.Column<string>(type: "text", nullable: false),
-                    QuestionStr = table.Column<string>(type: "text", nullable: false)
+                    GameId = table.Column<string>(type: "text", nullable: true),
+                    QuestionStr = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
