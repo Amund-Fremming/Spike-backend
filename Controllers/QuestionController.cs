@@ -40,6 +40,9 @@ public class Controller : ControllerBase
     [HttpPost]
     public async Task<ActionResult> AddQuestion([FromBody] Question question)
     {
+        if(question.GameId == null || question.QuestionStr == null)
+            return BadRequest();
+
         string gameIdEscaped;
         string questionStringEscaped;
         try
@@ -59,12 +62,5 @@ public class Controller : ControllerBase
         await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);
 
         return Ok("Question added!");
-    }
-
-    [HttpGet("/num")]
-    public async Task<ActionResult> GetNumberOfQuestions([FromQuery] string gameId)
-    {
-        var num = _repo.GetNumberOfQuestions(gameId);
-        return Ok(num);
     }
 }
