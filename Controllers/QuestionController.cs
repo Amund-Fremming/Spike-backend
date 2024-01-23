@@ -58,8 +58,8 @@ public class Controller : ControllerBase
         Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
         await _repo.AddQuestionAsyncTransaction(saniticedQuestion);
 
-        var count = _repo.GetNumberOfQuestions(question.GameId);
-        await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);
+        // var count = _repo.GetNumberOfQuestions(question.GameId);
+        // await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);
 
         return Ok("Question added!");
     }
