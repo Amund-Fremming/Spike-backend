@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Models;
 
-namespace Model;
+namespace Models;
 
 public class Question
 {   

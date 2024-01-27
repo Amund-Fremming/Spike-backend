@@ -1,6 +1,6 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
-using Model;
+using Models;
 
 namespace Repositories;
 
@@ -17,7 +17,8 @@ public class QuestionRepository
     {
         try {
             return await _context.Questions.Where(q => q.GameId == gameId).ToListAsync();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             throw new Exception(e.Message);
         }
