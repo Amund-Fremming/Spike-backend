@@ -32,3 +32,4 @@
 - PublishGame
 - InkrementGameVote
 - DecrementGameVote
+- AddUserToGame
