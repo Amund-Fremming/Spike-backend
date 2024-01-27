@@ -4,11 +4,11 @@ using Model;
 
 namespace Repositories;
 
-public class QuestionRepo
+public class QuestionRepository
 {
     public readonly AppDbContext _context;
 
-    public QuestionRepo(AppDbContext context)
+    public QuestionRepository(AppDbContext context)
     {
         _context = context;
     }
