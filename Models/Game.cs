@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Model;
+using Models;
 
 namespace Models;
 
@@ -11,7 +11,8 @@ public class Game
     public bool PublicGame { get; set; }
     public int Upvotes { get; set; }
     public int Downvotes { get; set; }
-    public ICollection<Question> Questions;
+    public ICollection<Question?> Questions;
+    public ICollection<User?> Users;
 
     public Game() {}
 

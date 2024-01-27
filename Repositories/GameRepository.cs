@@ -3,14 +3,9 @@ using Models;
 
 namespace Repositories;
 
-public class GameRepository
+public class GameRepository(AppDbContext context)
 {
-    public readonly AppDbContext _context;
-
-    public GameRepository(AppDbContext context)
-    {
-        _context = context;
-    }
+    public readonly AppDbContext _context = context;
 
     public async Task<Game?> GetGameById(string gameId)
     {
@@ -20,7 +15,21 @@ public class GameRepository
         }
         catch(Exception e)
         {
-            throw new InvalidOperationException($"");
+            throw new Exception(e.Message);
         }
     }
+
+    public async Task StartGame(string gameId)
+    {
+
+    }
+
+    public async Task SetGamePublic(string gameId)
+    {
+
+    }
+
+    public async Task
+
+    public async Task
 }

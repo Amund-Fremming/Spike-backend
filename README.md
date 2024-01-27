@@ -20,3 +20,15 @@
 ### Hva skal jeg gjøre annerledes neste gang
 
 - **Fyll ut når ferdig**
+
+# trenger
+
+- GetGameQuestionsById
+- AddQuestionToGame
+- GetNumberOfQuestions
+- GetGameById
+- GetPublicGames
+- StartGame
+- PublishGame
+- InkrementGameVote
+- DecrementGameVote

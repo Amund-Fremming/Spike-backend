@@ -1,13 +1,15 @@
+using Models;
+using Repositories;
+
 namespace Services;
 
-public class GameService
+public class GameService(GameRepository gameRepository)
 {
-    public readonly GameService _gameService;
+    public readonly GameRepository _gameRepository = gameRepository;
 
-    public GameService(GameService gameService)
+    public async Task<Game?> GetGameById(string gameId)
     {
-        _gameService = gameService;
+        return await _gameRepository.GetGameById(gameId);
     }
-
     
 }

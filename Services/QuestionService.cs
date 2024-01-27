@@ -3,33 +3,30 @@ using Repositories;
 
 namespace Services;
 
-public class QuestionService
+public class QuestionService(QuestionRepository questionRepo, GameRepository gameRepository)
 {
-    public readonly QuestionRepository _questionRepo;
-    public readonly GameRepository _gameRepository;
-
-    public QuestionService(QuestionRepository questionRepo, GameRepository gameRepository)
-    {
-        _questionRepo = questionRepo;
-        _gameRepository = gameRepository;
-    }
+    public readonly QuestionRepository _questionRepo = questionRepo;
+    public readonly GameRepository _gameRepository = gameRepository;
 
     public async Task<ICollection<Question>> GetGameQuestionsAsync(string gameId)
     {
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
-        return await _questionRepo.GetGameQuestionsAsync(gameId);
+        return await _questionRepo.GetGameQuestionsByGameId(gameId);
     }
 
     public async Task AddQuestionAsyncTransaction(Question question)
     {
+        Game game = await _gameRepository.GetGameById(question.GameId) ?? throw new KeyNotFoundException($"Game with ID {question.GameId}, does not exist!");
 
+        await _questionRepo.AddQuestionToGame(question);
     }
 
-    public int GetNumberOfQuestions(string gameId)
+    public async Task<int> GetNumberOfQuestions(string gameId)
     {
-        // TODO
-        return 0;
+        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
+
+        return _questionRepo.GetNumberOfQuestions(gameId);
     }
 
 }
