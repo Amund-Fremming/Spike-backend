@@ -11,10 +11,10 @@ namespace Controllers;
 [Route("spike")]
 public class Controller : ControllerBase
 {
-    public readonly QuestionRepo _repo;
+    public readonly QuestionRepository _repo;
     public readonly IHubContext<GameHub> _hubContext;
 
-    public Controller(QuestionRepo repo, IHubContext<GameHub> hubContext)
+    public Controller(QuestionRepository repo, IHubContext<GameHub> hubContext)
     {
         _repo = repo;
         _hubContext = hubContext;
