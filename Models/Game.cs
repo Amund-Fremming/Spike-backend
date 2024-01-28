@@ -12,7 +12,7 @@ public class Game
     public int Upvotes { get; set; }
     public int Downvotes { get; set; }
     public ICollection<Question?> Questions;
-    public ICollection<User?> Users;
+    public ICollection<User?> Voters;
 
     public Game() {}
 
