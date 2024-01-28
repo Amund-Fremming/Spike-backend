@@ -10,7 +10,7 @@ public class Question
     public string GameId { get; set; }
     public Game? Game { get; set; }
     public string? QuestionStr { get; set; }
-
+    
     public Question() {}
 
     public Question(string gameId, string questionStr)
