@@ -34,3 +34,17 @@
 - Flere bevegende elementer i bakgrunn som et romskip eller en meteor som flyr i bakgrunn av planeten
 - Mer annimasjoner på mascot figurene
 - Når et spill opprettes og startes burde man ikke kunne legge til spørsmål i dette spillet lenger, kanskje se på mulighet for å bytte host om man faller ut
+
+- **Fyll ut når ferdig**
+
+# trenger
+
+- GetGameQuestionsById
+- AddQuestionToGame
+- GetNumberOfQuestions
+- GetGameById
+- GetPublicGames
+- StartGame
+- PublishGame
+- InkrementGameVote
+- DecrementGameVote

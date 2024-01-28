@@ -1,13 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Hubs;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddScoped<QuestionRepo>();
+
+builder.Services.AddScoped<QuestionRepository>();
+builder.Services.AddScoped<GameRepository>();
+
+builder.Services.AddScoped<QuestionService>();
+builder.Services.AddScoped<GameService>();
 
 builder.Services.AddSignalR();
 
@@ -15,9 +21,9 @@ builder.Services.AddSignalR();
 var databaseConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 builder.Services.AddDbContext<Data.AppDbContext>(options =>
 {
-    // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
-    // options.UseNpgsql(connectionString);     // For testing locally
-    options.UseNpgsql(databaseConnectionString);
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
+    options.UseNpgsql(connectionString);     // For testing locally
+    // options.UseNpgsql(databaseConnectionString);
 });
 
 var app = builder.Build();
