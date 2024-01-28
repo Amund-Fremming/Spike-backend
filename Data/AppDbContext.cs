@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Model;
+using Models;
 
 namespace Data;
 
 public class AppDbContext : DbContext
 {
     public DbSet<Question> Questions { get; set; }
+    public DbSet<Game> Games { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -14,6 +15,15 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.Entity<Question>().HasKey(e => e.Id);
+        modelBuilder.Entity<Game>()
+            .HasKey(g => g.GameId);
+
+        modelBuilder.Entity<Question>()
+            .HasKey(q => q.Id);
+
+        modelBuilder.Entity<Question>()
+            .HasOne(q => q.Game)
+            .WithMany(g => g.Questions)
+            .HasForeignKey(q => q.GameId);
     }
 }

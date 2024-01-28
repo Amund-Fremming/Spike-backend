@@ -1,12 +1,14 @@
 using System.ComponentModel.DataAnnotations;
+using Models;
 
-namespace Model;
+namespace Models;
 
 public class Question
 {   
     [Key]
     public int Id { get; set; }
-    public string? GameId { get; set; }
+    public string GameId { get; set; }
+    public Game? Game { get; set; }
     public string? QuestionStr { get; set; }
 
     public Question() {}
