@@ -8,7 +8,7 @@ using Hubs;
 namespace Controllers;
 
 [ApiController]
-[Route("spike")]
+[Route("spike/questions")]
 public class Controller(QuestionRepository repo, IHubContext<GameHub> hubContext) : ControllerBase
 {
     public readonly QuestionRepository _repo = repo;
@@ -17,44 +17,56 @@ public class Controller(QuestionRepository repo, IHubContext<GameHub> hubContext
     [HttpGet]
     public async Task<ActionResult> GetGameQuestions([FromQuery] string gameId)
     {
+        if(String.IsNullOrEmpty(gameId))
+            return BadRequest("Input invalid!");
+
         string gameIdSaniticed;
+
         try
         {
             gameIdSaniticed = SecurityElement.Escape(gameId);
+            var questions = await _repo.GetGameQuestionsByGameId(gameIdSaniticed);
+            return Ok(questions);
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
         }
         catch(Exception e)
         {
-            return BadRequest(e.Message);
+            return StatusCode(500, e.Message);
         }
-
-        var questions = await _repo.GetGameQuestionsByGameId(gameIdSaniticed);
-        return Ok(questions);
     }
 
     [HttpPost]
     public async Task<ActionResult> AddQuestion([FromBody] Question question)
     {
-        if(question.GameId == null || question.QuestionStr == null)
+        if(question.GameId == null || String.IsNullOrEmpty(question.QuestionStr))
             return BadRequest();
 
         string gameIdEscaped;
         string questionStringEscaped;
+
         try
         {
             gameIdEscaped = SecurityElement.Escape(question.GameId);
             questionStringEscaped = SecurityElement.Escape(question.QuestionStr);
+
+            Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
+            await _repo.AddQuestionToGame(saniticedQuestion);
+
+            var count = _repo.GetNumberOfQuestions(question.GameId);
+            await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);
+
+            return Ok("Question added!");
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
         }
         catch(Exception e)
         {
-            return BadRequest(e.Message);
+            return StatusCode(500, e.Message);
         }
-
-        Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
-        await _repo.AddQuestionToGame(saniticedQuestion);
-
-        var count = _repo.GetNumberOfQuestions(question.GameId);
-        await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);
-
-        return Ok("Question added!");
     }
 }

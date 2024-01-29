@@ -39,25 +39,25 @@ public class GameService(GameRepository gameRepository)
     }
 
     public async Task SetGamePublic(string gameId)
-    {
+    {           
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
         await _gameRepository.SetGamePublic(game);
     }
 
-    public async Task VoteOnGame(long deviceId, string gameId, bool vote)
+    public async Task VoteOnGame(Voter voter)
     {
-        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
+        Game game = await _gameRepository.GetGameById(voter.GameId) ?? throw new KeyNotFoundException($"Game with ID {voter.GameId}, does not exist!");
 
-        bool voterExistsForGame = await _gameRepository.DoesVoterExistForGame(gameId, deviceId);
+        bool voterExistsForGame = await _gameRepository.DoesVoterExistForGame(voter.GameId, voter.UserDeviceId);
 
         if(voterExistsForGame)
         {
-            await _gameRepository.UpdateVoterForGame(deviceId, gameId, vote);
+            await _gameRepository.UpdateVoterForGame(voter.UserDeviceId, voter.GameId, voter.Vote);
         }
         else
         {
-            await _gameRepository.CreateVoterForGame(new Voter(deviceId, gameId, vote));
+            await _gameRepository.CreateVoterForGame(voter);
         }
     }
 }
