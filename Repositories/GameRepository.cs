@@ -24,38 +24,26 @@ public class GameRepository(AppDbContext context)
 
     }
 
-    public async Task<Game> CreateGame(Game game)
+    public async Task CreateGame(Game game)
     {
 
     }
 
-    public async Task<Game> DeleteGame(Game game)
+    public async Task DeleteGame(Game game)
     {
 
     }
 
-    /// <summary>
-    /// Sets the game GameStarted property to true. 
-    /// </summary>
-    /// <param name="gameId"></param>
-    public async Task StartGame(string gameId)
+    public async Task StartGame(Game game)
     {
 
     }
 
-    /// <summary>
-    /// Sets the game PublicGame property to true. 
-    /// </summary>
-    /// <param name="gameId"></param>
-    public async Task SetGamePublic(string gameId)
+    public async Task SetGamePublic(Game game)
     {
 
     }
 
-    /// <summary>
-    /// Adds a voter to a game
-    /// </summary>
-    /// <param name="voter"></param>
     public async Task CreateVoterForGame(Voter voter)
     {
 
@@ -66,5 +54,8 @@ public class GameRepository(AppDbContext context)
 
     }
 
+    public async Task DoesVoterExistForGame(int gameId, int deviceId)
+    {
 
+    }
 }
