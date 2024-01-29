@@ -26,7 +26,7 @@ public class QuestionService(QuestionRepository questionRepo, GameRepository gam
     {
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
-        return _questionRepo.GetNumberOfQuestions(gameId);
+        return await _questionRepo.GetNumberOfQuestions(gameId);
     }
 
 }

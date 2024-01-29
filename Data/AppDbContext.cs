@@ -3,15 +3,11 @@ using Models;
 
 namespace Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public DbSet<Question> Questions { get; set; }
     public DbSet<Game> Games { get; set; }
-
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-
-    }
+    public DbSet<Question> Questions { get; set; }
+    public DbSet<Voter> Voters { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -21,9 +17,17 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Question>()
             .HasKey(q => q.Id);
 
+        modelBuilder.Entity<Voter>()
+            .HasKey(v => v.VoterId);
+
         modelBuilder.Entity<Question>()
             .HasOne(q => q.Game)
             .WithMany(g => g.Questions)
             .HasForeignKey(q => q.GameId);
+
+        modelBuilder.Entity<Voter>()
+            .HasOne(v => v.Game)
+            .WithMany(g => g.Voters)
+            .HasForeignKey(v => v.GameId);
     }
 }

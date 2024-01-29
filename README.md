@@ -36,15 +36,3 @@
 - Når et spill opprettes og startes burde man ikke kunne legge til spørsmål i dette spillet lenger, kanskje se på mulighet for å bytte host om man faller ut
 
 - **Fyll ut når ferdig**
-
-# trenger
-
-- GetGameQuestionsById
-- AddQuestionToGame
-- GetNumberOfQuestions
-- GetGameById
-- GetPublicGames
-- StartGame
-- PublishGame
-- InkrementGameVote
-- DecrementGameVote

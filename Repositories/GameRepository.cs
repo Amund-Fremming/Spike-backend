@@ -19,17 +19,52 @@ public class GameRepository(AppDbContext context)
         }
     }
 
+    public async Task<ICollection<Game>> GetPublicGamesByRating()
+    {
+
+    }
+
+    public async Task<Game> CreateGame(Game game)
+    {
+
+    }
+
+    public async Task<Game> DeleteGame(Game game)
+    {
+
+    }
+
+    /// <summary>
+    /// Sets the game GameStarted property to true. 
+    /// </summary>
+    /// <param name="gameId"></param>
     public async Task StartGame(string gameId)
     {
 
     }
 
+    /// <summary>
+    /// Sets the game PublicGame property to true. 
+    /// </summary>
+    /// <param name="gameId"></param>
     public async Task SetGamePublic(string gameId)
     {
 
     }
 
-    public async Task
+    /// <summary>
+    /// Adds a voter to a game
+    /// </summary>
+    /// <param name="voter"></param>
+    public async Task CreateVoterForGame(Voter voter)
+    {
 
-    public async Task
+    }
+
+    public async Task UpdateVoterForGame(Voter oldVoter, Voter updatedVoter)
+    {
+
+    }
+
+
 }

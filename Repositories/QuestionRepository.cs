@@ -37,8 +37,8 @@ public class QuestionRepository(AppDbContext context)
         }
     }
 
-    public int GetNumberOfQuestions(string gameId)
+    public async Task<int> GetNumberOfQuestions(string gameId)
     {
-        return _context.Questions.Count(q => q.GameId == gameId);
+        return await _context.Questions.CountAsync(q => q.GameId == gameId);
     }
 }
