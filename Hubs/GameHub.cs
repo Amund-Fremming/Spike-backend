@@ -1,20 +1,15 @@
 using Microsoft.AspNetCore.SignalR;
-using Repositories;
+using Services;
 
 namespace Hubs;
 
-public class GameHub : Hub
+public class GameHub(QuestionService service) : Hub
 {
-    public readonly QuestionRepo _repo;
-
-    public GameHub(QuestionRepo repo) 
-    {
-        _repo = repo;
-    }
+    public readonly QuestionService _service = service;
 
     public async Task QuestionAdded(string gameId)
     {
-        int count = _repo.GetNumberOfQuestions(gameId);
+        int count = await _service.GetNumberOfQuestions(gameId);
         await Clients.All.SendAsync("ReceiveQuestionCount", gameId, count);
     }
 }

@@ -28,5 +28,4 @@ public class QuestionService(QuestionRepository questionRepo, GameRepository gam
 
         return await _questionRepo.GetNumberOfQuestions(gameId);
     }
-
 }

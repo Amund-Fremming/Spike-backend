@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Model;
+using Models;
 using Repositories;
 using System.Security;
 using Hubs;
@@ -9,16 +9,10 @@ namespace Controllers;
 
 [ApiController]
 [Route("spike")]
-public class Controller : ControllerBase
+public class Controller(QuestionRepository repo, IHubContext<GameHub> hubContext) : ControllerBase
 {
-    public readonly QuestionRepository _repo;
-    public readonly IHubContext<GameHub> _hubContext;
-
-    public Controller(QuestionRepository repo, IHubContext<GameHub> hubContext)
-    {
-        _repo = repo;
-        _hubContext = hubContext;
-    }
+    public readonly QuestionRepository _repo = repo;
+    public readonly IHubContext<GameHub> _hubContext = hubContext;
 
     [HttpGet]
     public async Task<ActionResult> GetGameQuestions([FromQuery] string gameId)
@@ -33,7 +27,7 @@ public class Controller : ControllerBase
             return BadRequest(e.Message);
         }
 
-        var questions = await _repo.GetGameQuestionsAsync(gameIdSaniticed);
+        var questions = await _repo.GetGameQuestionsByGameId(gameIdSaniticed);
         return Ok(questions);
     }
 
@@ -56,7 +50,7 @@ public class Controller : ControllerBase
         }
 
         Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
-        await _repo.AddQuestionAsyncTransaction(saniticedQuestion);
+        await _repo.AddQuestionToGame(saniticedQuestion);
 
         var count = _repo.GetNumberOfQuestions(question.GameId);
         await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);

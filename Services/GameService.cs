@@ -9,33 +9,55 @@ public class GameService(GameRepository gameRepository)
 
     public async Task<ICollection<Game>> GetPublicGamesByRating()
     {
-
+        return await _gameRepository.GetPublicGamesByRating();
     }
 
-    public async Task CreateGame(Game game)
+    public async Task CreateGame(Game newGame)
     {
+        Game? game = await _gameRepository.GetGameById(newGame.GameId);
 
+        if(game != null)
+        {
+            throw new Exception($"Game with ID {newGame.GameId}, already exists!");
+        }
+
+        await _gameRepository.CreateGame(newGame);
     }
 
     public async Task DeleteGame(string gameId)
     {
+        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
+        await _gameRepository.DeleteGame(game);
     }
 
     public async Task StartGame(string gameId)
     {
+        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
+        await _gameRepository.StartGame(game);
     }
 
     public async Task SetGamePublic(string gameId)
     {
+        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
+        await _gameRepository.SetGamePublic(game);
     }
 
-    public async Task VoteOnGame(int deviceId, int gameId, bool vote)
+    public async Task VoteOnGame(long deviceId, string gameId, bool vote)
     {
-        // Check if a voter with the given deviceId exists for a game
-            // If, update the Voter
-            // Else, create a voter
+        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
+
+        bool voterExistsForGame = await _gameRepository.DoesVoterExistForGame(gameId, deviceId);
+
+        if(voterExistsForGame)
+        {
+            await _gameRepository.UpdateVoterForGame(deviceId, gameId, vote);
+        }
+        else
+        {
+            await _gameRepository.CreateVoterForGame(new Voter(deviceId, gameId, vote));
+        }
     }
 }

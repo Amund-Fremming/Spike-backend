@@ -2,14 +2,8 @@ using Services;
 
 namespace Controllers;
 
-public class GameController
+public class GameController(GameService gameService, QuestionService questionService)
 {
-    public readonly GameService _gameService;
-    public readonly QuestionService _questionService;
-
-    public GameController(GameService gameService, QuestionService questionService)
-    {
-        _gameService = gameService;
-        _questionService = questionService;
-    }
+    public readonly GameService _gameService = gameService;
+    public readonly QuestionService _questionService = questionService;
 }
