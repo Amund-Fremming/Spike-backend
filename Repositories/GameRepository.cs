@@ -35,13 +35,9 @@ public class GameRepository(AppDbContext context)
             _context.Add(game);
             await _context.SaveChangesAsync();
         }
-        catch (InvalidOperationException e)
+        catch(Exception)
         {
-            throw new InvalidOperationException("Error while creating game, invalid operation: " + e.Message);
-        }
-        catch(Exception e)
-        {
-            throw new Exception("Error while creating game: " + e.Message);
+            Console.WriteLine("Error in crating game in repo.");
         }
     }
 
@@ -54,7 +50,8 @@ public class GameRepository(AppDbContext context)
     public async Task StartGame(Game game)
     {
         game.GameStarted = true;
-        game.NumberOfQuestions = game.Questions.Count;
+        int numQ = await _context.Questions.CountAsync(q => q.GameId == game.GameId);
+        game.NumberOfQuestions = numQ;
 
         await _context.SaveChangesAsync();
     }

@@ -18,10 +18,12 @@ public class GameService(GameRepository gameRepository)
 
         if(game != null)
         {
-            throw new Exception($"Game with ID {newGame.GameId}, already exists!");
+            throw new InvalidDataException($"Game with ID {newGame.GameId}, already exists!");
         }
-
-        await _gameRepository.CreateGame(newGame);
+        else
+        {
+            await _gameRepository.CreateGame(newGame);
+        }
     }
 
     public async Task DeleteGame(string gameId)

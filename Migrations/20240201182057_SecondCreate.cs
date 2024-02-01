@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class SecondCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,8 @@ namespace backend.Migrations
                     GameId = table.Column<string>(type: "text", nullable: false),
                     GameStarted = table.Column<bool>(type: "boolean", nullable: false),
                     PublicGame = table.Column<bool>(type: "boolean", nullable: false),
-                    IconImageUrl = table.Column<string>(type: "text", nullable: false)
+                    IconImage = table.Column<string>(type: "text", nullable: false),
+                    NumberOfQuestions = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -14,15 +14,16 @@ public class GameController(GameService gameService, QuestionService questionSer
     public readonly QuestionService _questionService = questionService;
     public readonly AppDbContext _context = context;
 
-    // TESTING ONLY!!!
-    [HttpGet]
-    public async Task<ActionResult<Game>> GetGameByGameId([FromQuery] string gameId)
+    [HttpGet("gamestarted")]
+    public async Task<ActionResult<bool>> HaveGameStarted([FromQuery] string gameId)
     {
-        var res = await _context.Games
-            .Where(g => g.GameId == gameId)
-            .SingleOrDefaultAsync();
+        return await _context.Games.AnyAsync(g => g.GameId == gameId && g.GameStarted);
+    }
 
-        return Ok(res);
+    [HttpGet("gameexists")]
+    public async Task<ActionResult<bool>> DoesGameExist([FromQuery] string gameId)
+    {
+        return await _context.Games.AnyAsync(g => g.GameId == gameId);
     }
 
     [HttpPost]
@@ -37,12 +38,17 @@ public class GameController(GameService gameService, QuestionService questionSer
         {
            return NotFound(e.Message);
         }
+        catch(InvalidDataException) 
+        {
+            return BadRequest("GAME_EXISTS");
+        }
         catch(Exception e)
         {
+            Console.WriteLine("JHer fanger vi");
             return StatusCode(500, e.Message);
         }
     }
-    
+
     // GET GAMES BY RATING!!
 
     [HttpDelete]
@@ -79,7 +85,7 @@ public class GameController(GameService gameService, QuestionService questionSer
         }
         catch(KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
         catch(Exception e)
         {
