@@ -30,8 +30,19 @@ public class GameRepository(AppDbContext context)
 
     public async Task CreateGame(Game game)
     {
-        _context.Add(game);
-        await _context.SaveChangesAsync();
+        try
+        {
+            _context.Add(game);
+            await _context.SaveChangesAsync();
+        }
+        catch (InvalidOperationException e)
+        {
+            throw new InvalidOperationException("Error while creating game, invalid operation: " + e.Message);
+        }
+        catch(Exception e)
+        {
+            throw new Exception("Error while creating game: " + e.Message);
+        }
     }
 
     public async Task DeleteGame(Game game)
