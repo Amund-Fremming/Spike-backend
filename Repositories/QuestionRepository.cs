@@ -25,8 +25,8 @@ public class QuestionRepository(AppDbContext context)
         transaction.Commit();
     }
 
-    public async Task<int> GetNumberOfQuestions(string gameId)
+    public int GetNumberOfQuestions(string gameId)
     {
-        return await _context.Questions.CountAsync(q => q.GameId == gameId);
+        return _context.Questions.Count(q => q.GameId == gameId);
     }
 }

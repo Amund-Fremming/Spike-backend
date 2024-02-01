@@ -22,10 +22,8 @@ public class QuestionService(QuestionRepository questionRepo, GameRepository gam
         await _questionRepo.AddQuestionToGame(question);
     }
 
-    public async Task<int> GetNumberOfQuestions(string gameId)
+    public int GetNumberOfQuestions(string gameId)
     {
-        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
-
-        return await _questionRepo.GetNumberOfQuestions(gameId);
+        return _questionRepo.GetNumberOfQuestions(gameId);
     }
 }

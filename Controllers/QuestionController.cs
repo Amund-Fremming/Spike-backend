@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Models;
-using Repositories;
+using Services;
 using System.Security;
 using Hubs;
 
@@ -9,9 +9,9 @@ namespace Controllers;
 
 [ApiController]
 [Route("spike/questions")]
-public class Controller(QuestionRepository repo, IHubContext<GameHub> hubContext) : ControllerBase
+public class Controller(QuestionService service, IHubContext<GameHub> hubContext) : ControllerBase
 {
-    public readonly QuestionRepository _repo = repo;
+    public readonly QuestionService _service = service;
     public readonly IHubContext<GameHub> _hubContext = hubContext;
 
     [HttpGet]
@@ -25,7 +25,7 @@ public class Controller(QuestionRepository repo, IHubContext<GameHub> hubContext
         try
         {
             gameIdSaniticed = SecurityElement.Escape(gameId);
-            var questions = await _repo.GetGameQuestionsByGameId(gameIdSaniticed);
+            var questions = await _service.GetGameQuestionsAsync(gameIdSaniticed);
             return Ok(questions);
         }
         catch(KeyNotFoundException e)
@@ -53,9 +53,9 @@ public class Controller(QuestionRepository repo, IHubContext<GameHub> hubContext
             questionStringEscaped = SecurityElement.Escape(question.QuestionStr);
 
             Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
-            await _repo.AddQuestionToGame(saniticedQuestion);
+            await _service.AddQuestionAsyncTransaction(saniticedQuestion);
 
-            var count = _repo.GetNumberOfQuestions(question.GameId);
+            var count = _service.GetNumberOfQuestions(question.GameId);
             await _hubContext.Clients.All.SendAsync("ReceiveQuestionCount", question.GameId, count);
 
             return Ok("Question added!");

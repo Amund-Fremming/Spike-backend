@@ -4,7 +4,6 @@ namespace Models;
 
 public class Game
 {
-    [Key]
     public string GameId { get; set; }
     public bool GameStarted { get; set; }
     public bool PublicGame { get; set; }

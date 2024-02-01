@@ -42,6 +42,7 @@ public class GameController(GameService gameService, QuestionService questionSer
             return StatusCode(500, e.Message);
         }
     }
+    
     // GET GAMES BY RATING!!
 
     [HttpDelete]
@@ -65,7 +66,7 @@ public class GameController(GameService gameService, QuestionService questionSer
         }
     }
 
-    [HttpPost("/startgame")]
+    [HttpPut("startgame")]
     public async Task<ActionResult> StartGame([FromBody] string gameId)
     {
         if(String.IsNullOrEmpty(gameId))
@@ -86,7 +87,7 @@ public class GameController(GameService gameService, QuestionService questionSer
         }
     }
 
-    [HttpPost("/publishgame")]
+    [HttpPut("publishgame")]
     public async Task<ActionResult> PublishGame([FromBody] string gameId)
     {
         if(String.IsNullOrEmpty(gameId))
@@ -107,7 +108,7 @@ public class GameController(GameService gameService, QuestionService questionSer
         }
     }
 
-    [HttpPost("/vote")]
+    [HttpPut("vote")]
     public async Task<ActionResult> VoteOnGame([FromBody] Voter voter)
     {
         try

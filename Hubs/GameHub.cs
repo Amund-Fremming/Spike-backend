@@ -3,13 +3,18 @@ using Services;
 
 namespace Hubs;
 
-public class GameHub(QuestionService service) : Hub
+public class GameHub : Hub
 {
-    public readonly QuestionService _service = service;
+    private readonly QuestionService _service;
+
+    public GameHub(QuestionService service)
+    {
+        _service = service;
+    }
 
     public async Task QuestionAdded(string gameId)
     {
-        int count = await _service.GetNumberOfQuestions(gameId);
+        int count = _service.GetNumberOfQuestions(gameId);
         await Clients.All.SendAsync("ReceiveQuestionCount", gameId, count);
     }
 }
