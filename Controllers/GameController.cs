@@ -42,6 +42,7 @@ public class GameController(GameService gameService, QuestionService questionSer
             return StatusCode(500, e.Message);
         }
     }
+    // GET GAMES BY RATING!!
 
     [HttpDelete]
     public async Task<ActionResult> DeleteGame([FromBody] string gameId)
