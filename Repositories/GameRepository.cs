@@ -17,6 +17,14 @@ public class GameRepository(AppDbContext context)
     {
         return await _context.Games
             .Where(g => g.PublicGame == true)
+            .Select(g => new
+            {
+                Game = g,
+                Score = g.Voters.Any() ? ((double)g.Voters.Count(v => v.Vote) / g.Voters.Count()) * 100 : 0
+            })
+            .OrderByDescending(g => g.Score)
+            .Take(15)
+            .Select(g => g.Game)
             .ToListAsync();
     }
 
@@ -35,6 +43,8 @@ public class GameRepository(AppDbContext context)
     public async Task StartGame(Game game)
     {
         game.GameStarted = true;
+        game.NumberOfQuestions = game.Questions.Count;
+
         await _context.SaveChangesAsync();
     }
 

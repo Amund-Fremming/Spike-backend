@@ -60,4 +60,10 @@ public class GameService(GameRepository gameRepository)
             await _gameRepository.CreateVoterForGame(voter);
         }
     }
+
+    public async Task<ICollection<Game>> SearchForGame(string searchString)
+    {
+        // TODO
+        return null;   
+    }
 }

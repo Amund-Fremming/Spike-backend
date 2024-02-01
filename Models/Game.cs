@@ -8,17 +8,19 @@ public class Game
     public string GameId { get; set; }
     public bool GameStarted { get; set; }
     public bool PublicGame { get; set; }
-    public string IconImageUrl { get; set; }
+    public string IconImage { get; set; }
+    public int NumberOfQuestions { get; set; }
     public ICollection<Question?> Questions;
     public ICollection<Voter?> Voters;
 
     public Game() {}
 
-    public Game(string gameId, bool gameStarted, bool publicGame, string iconImageUrl)
+    public Game(string gameId, bool gameStarted, bool publicGame, string iconImage, int numberOfQuestions)
     {   
         GameId = gameId ?? throw new ArgumentNullException(nameof(gameId));
         GameStarted = gameStarted;
         PublicGame = publicGame;
-        IconImageUrl = iconImageUrl;
+        IconImage = iconImage;
+        NumberOfQuestions = numberOfQuestions;
     }
 }
