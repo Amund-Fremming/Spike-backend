@@ -1,12 +1,11 @@
 # Spike
 
 - [Figma](https://www.figma.com/file/oBgpl8HkiowbkUFe6HchFL/Untitled?node-id=0%3A1&mode=dev)
-- [Frontend](https://github.com/Amund-Fremming/Spike-frontend)
 
 ### Kort om appen
 
 - Super enkel og liten spørsmål applikasjon.
-- Her man man opprette og bli med i spill og legge til spørsmål
+- Her man man opprette, bli med i spill, legge til spørsmål og publisere spillet sitt.
 - Har brukt ASP.NET som backend som hostes hos Azure
 - React native som frontend
 
