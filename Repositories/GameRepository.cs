@@ -20,7 +20,7 @@ public class GameRepository(AppDbContext context)
             .Select(g => new
             {
                 Game = g,
-                Score = g.Voters.Any() ? ((double)g.Voters.Count(v => v.Vote) / g.Voters.Count()) * 100 : 0
+                Score = g.Voters.Any() ? ((double)g.Voters.Count(v => v != null && v.Vote) / g.Voters.Count()) * 100 : 0
             })
             .OrderByDescending(g => g.Score)
             .Take(15)

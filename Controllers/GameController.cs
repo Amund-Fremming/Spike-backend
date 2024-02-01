@@ -1,15 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Models;
+using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Controllers;
 
 [ApiController]
 [Route("spike/games")]
-public class GameController(GameService gameService, QuestionService questionService) : ControllerBase
+public class GameController(GameService gameService, QuestionService questionService, AppDbContext context) : ControllerBase
 {
     public readonly GameService _gameService = gameService;
     public readonly QuestionService _questionService = questionService;
+    public readonly AppDbContext _context = context;
+
+    // TESTING ONLY!!!
+    [HttpGet]
+    public async Task<ActionResult<Game>> GetGameByGameId([FromQuery] string gameId)
+    {
+        var res = await _context.Games
+            .Where(g => g.GameId == gameId)
+            .SingleOrDefaultAsync();
+
+        return Ok(res);
+    }
 
     [HttpPost]
     public async Task<ActionResult<Game>> CreateGame([FromBody] Game newGame)

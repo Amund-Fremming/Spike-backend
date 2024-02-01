@@ -29,9 +29,19 @@
 
 ### Ting som skal legges til
 
-- Mulighet for å lagre spill, slik at man har en feed med spill fra community. Her skal man kunne stemme opp eller ned på et spill, der de med høyest vurderingen ligger på toppen
 - Flere bevegende elementer i bakgrunn som et romskip eller en meteor som flyr i bakgrunn av planeten
 - Mer annimasjoner på mascot figurene
-- Når et spill opprettes og startes burde man ikke kunne legge til spørsmål i dette spillet lenger, kanskje se på mulighet for å bytte host om man faller ut
 
-- **Fyll ut når ferdig**
+# Spike - TODO
+
+- test apier
+- Opprette søk
+- Screen for browsing med mulighet for å scrolle evig?
+
+- Legg til start game api i handle start
+- Card komponent
+- Ikoner for nivå
+- Se om det trengs transaksjoner
+- Legg til alert med vil du publisere spill?
+
+- Refaktorer
