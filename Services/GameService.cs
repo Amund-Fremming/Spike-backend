@@ -51,6 +51,8 @@ public class GameService(GameRepository gameRepository)
     {
         Game game = await _gameRepository.GetGameById(voter.GameId) ?? throw new KeyNotFoundException($"Game with ID {voter.GameId}, does not exist!");
 
+        
+
         bool voterExistsForGame = await _gameRepository.DoesVoterExistForGame(voter.GameId, voter.UserDeviceId);
 
         if(voterExistsForGame)

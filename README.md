@@ -34,7 +34,6 @@
 
 # Spike - TODO
 
-- test apier
 - Opprette søk
 - Screen for browsing med mulighet for å scrolle evig?
 
@@ -44,4 +43,13 @@
 - Se om det trengs transaksjoner
 - Legg til alert med vil du publisere spill?
 
+- Koble Hente games som man kan spille
+- Koble Vote game
+
+- Ikke mulig å vote på ett game du allerede har votet på
+
 - Refaktorer
+
+## Fix before appstore submit
+
+- Expo doctor (npx)

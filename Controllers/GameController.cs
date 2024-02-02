@@ -3,6 +3,7 @@ using Services;
 using Models;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace Controllers;
 
@@ -26,8 +27,25 @@ public class GameController(GameService gameService, QuestionService questionSer
         return await _context.Games.AnyAsync(g => g.GameId == gameId);
     }
 
+    [HttpGet("gamesbyrating")]
+    public async Task<ActionResult<ICollection<Game>>> GetGamesSorted() {
+        try
+        {
+            return Ok(await _gameService.GetPublicGamesByRating());
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+
     [HttpPost]
-    public async Task<ActionResult<Game>> CreateGame([FromBody] Game newGame)
+    public async Task<ActionResult> CreateGame([FromBody] Game newGame)
     {
         try
         {
@@ -48,8 +66,6 @@ public class GameController(GameService gameService, QuestionService questionSer
             return StatusCode(500, e.Message);
         }
     }
-
-    // GET GAMES BY RATING!!
 
     [HttpDelete]
     public async Task<ActionResult> DeleteGame([FromBody] string gameId)
