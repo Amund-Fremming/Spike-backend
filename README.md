@@ -38,15 +38,14 @@
 
 ## Frontened
 
-- Legge til deviceId på spill useEffect
+- Legge til deviceId på spill useEffect med AsyncAtorage
 
 - Generer ikoner for nivå
 - Legge til vote knapper
 - Display prosent rating (Kanskje farger som indikerer hvor bra det er på skriften, gul, grønn, rød?)
-- Koble opp vote
 - Burde lyuse den voten du har avgitt
 
-- Scrolling evig eller sider på browse
+- Scrolling evig eller sider
 
 - Legge til en plass der hvor spillere kan anngi iconet til spillet sitt
 - Koble opp søk
@@ -54,12 +53,12 @@
 # Backend
 
 - fullfør søk api
+- Set max antall Games som hentes per søk, også første!
 - Fiks \_context bruk til repos i Controllere
 
 ## Ytelsesoptimalisering
 
 - Legg til spinner der lasting kan ta tid
-- Pre load games til browse!!
 - Fiks glitch loading på mascot
 
 - Legg til transaksjoner så ikke samme spill kan lages av to
