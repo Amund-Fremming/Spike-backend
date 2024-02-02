@@ -32,23 +32,43 @@
 - Flere bevegende elementer i bakgrunn som et romskip eller en meteor som flyr i bakgrunn av planeten
 - Mer annimasjoner på mascot figurene
 
+<hr>
+
 # Spike - TODO
 
-- Opprette søk
-- Screen for browsing med mulighet for å scrolle evig?
+## Frontened
 
-- Legg til start game api i handle start
-- Card komponent
-- Ikoner for nivå
-- Se om det trengs transaksjoner
-- Legg til alert med vil du publisere spill?
+- Legge til deviceId på spill useEffect
 
-- Koble Hente games som man kan spille
-- Koble Vote game
+- Generer ikoner for nivå
+- Legge til vote knapper
+- Display prosent rating (Kanskje farger som indikerer hvor bra det er på skriften, gul, grønn, rød?)
+- Koble opp vote
+- Burde lyuse den voten du har avgitt
 
-- Ikke mulig å vote på ett game du allerede har votet på
+- Scrolling evig eller sider på browse
 
-- Refaktorer
+- Legge til en plass der hvor spillere kan anngi iconet til spillet sitt
+- Koble opp søk
+
+# Backend
+
+- fullfør søk api
+- Fiks \_context bruk til repos i Controllere
+
+## Ytelsesoptimalisering
+
+- Legg til spinner der lasting kan ta tid
+- Pre load games til browse!!
+- Fiks glitch loading på mascot
+
+- Legg til transaksjoner så ikke samme spill kan lages av to
+
+## Finishing touches
+
+- Input validering!
+- Refaktorer frontend
+- Refaktorer backend og legg til error handling!!
 
 ## Fix before appstore submit
 

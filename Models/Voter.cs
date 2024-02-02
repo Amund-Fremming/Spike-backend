@@ -11,7 +11,7 @@ public class Voter
     public Game? Game { get; set; }
     public bool Vote { get; set; }
 
-    public Voter() {}
+    public Voter() { GameId = "None"; }
 
     public Voter(long userDeviceId, string gameId, bool vote)
     {

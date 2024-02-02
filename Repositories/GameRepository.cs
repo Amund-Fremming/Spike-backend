@@ -16,7 +16,7 @@ public class GameRepository(AppDbContext context)
     public async Task<ICollection<Game>> GetPublicGamesByRating()
     {
         return await _context.Games
-            .Where(g => g.PublicGame == true)
+            .Where(g => g.PublicGame == true)/*
             .Select(g => new
             {
                 Game = g,
@@ -24,7 +24,7 @@ public class GameRepository(AppDbContext context)
             })
             .OrderByDescending(g => g.Score)
             .Take(15)
-            .Select(g => g.Game)
+            .Select(g => g.Game)*/
             .ToListAsync();
     }
 
