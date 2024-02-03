@@ -22,7 +22,11 @@ public class DeviceRepository(AppDbContext context) {
                     return false;
                 }
 
-                await _context.AddAsync(new Device(deviceId));
+                Device device = new Device(deviceId);
+                _context.Add(device);
+                await _context.SaveChangesAsync();
+
+                transaction.Commit();
                 return true;
             }
             catch

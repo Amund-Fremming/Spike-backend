@@ -3,17 +3,18 @@ using Services;
 using Models;
 using Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
+using Repositories;
 
 namespace Controllers;
 
 [ApiController]
 [Route("spike/games")]
-public class GameController(GameService gameService, QuestionService questionService, AppDbContext context) : ControllerBase
+public class GameController(GameService gameService, QuestionService questionService, DeviceRepository deviceRepo, AppDbContext context) : ControllerBase
 {
     public readonly GameService _gameService = gameService;
     public readonly QuestionService _questionService = questionService;
     public readonly AppDbContext _context = context;
+    public readonly DeviceRepository _deviceRepo = deviceRepo;
 
     [HttpGet("gamestarted")]
     public async Task<ActionResult<bool>> HaveGameStarted([FromQuery] string gameId)
@@ -137,6 +138,24 @@ public class GameController(GameService gameService, QuestionService questionSer
         {
             await _gameService.VoteOnGame(voter);
             return Ok("Vote Submitted!");
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpPost("adddevice")]
+    public async Task<ActionResult> AddDevice([FromBody] string deviceId)
+    {
+        try
+        {
+            bool result = await _deviceRepo.AddDevice(deviceId);
+            return Ok(result);
         }
         catch(KeyNotFoundException e)
         {

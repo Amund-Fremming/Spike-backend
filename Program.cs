@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<QuestionRepository>();
 builder.Services.AddScoped<GameRepository>();
+builder.Services.AddScoped<DeviceRepository>();
 
 builder.Services.AddScoped<QuestionService>();
 builder.Services.AddScoped<GameService>();
