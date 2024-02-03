@@ -58,6 +58,7 @@
 ## Finishing touches
 
 - Hvis ikke kontakt med backend, alert om ikke tilkoblet nettverk!
+- Ny splash screen som er lik og like stor som loading bilde
 
 - Søk sorteres etter rating
 - Input validering
