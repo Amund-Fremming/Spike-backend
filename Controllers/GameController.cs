@@ -109,14 +109,14 @@ public class GameController(GameService gameService, QuestionService questionSer
     }
 
     [HttpPut("publishgame")]
-    public async Task<ActionResult> PublishGame([FromBody] string gameId)
+    public async Task<ActionResult> PublishGame([FromBody] string icon, [FromQuery]string gameId)
     {
-        if(String.IsNullOrEmpty(gameId))
+        if(String.IsNullOrEmpty(gameId) || String.IsNullOrEmpty(icon))
             return BadRequest("Input invalid!");
 
         try
         {
-            await _gameService.SetGamePublic(gameId);
+            await _gameService.SetGamePublicAndSetIcon(gameId, icon);
             return Ok("Game Published!");
         }
         catch(KeyNotFoundException e)

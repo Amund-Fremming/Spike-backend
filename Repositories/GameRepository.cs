@@ -57,9 +57,10 @@ public class GameRepository(AppDbContext context)
         await _context.SaveChangesAsync();
     }
 
-    public async Task SetGamePublic(Game game)
+    public async Task SetGamePublicAndSetIcon(Game game, string icon)
     {
         game.PublicGame = true;
+        game.IconImage = icon;
         await _context.SaveChangesAsync();
     }
 

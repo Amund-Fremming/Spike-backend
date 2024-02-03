@@ -40,11 +40,11 @@ public class GameService(GameRepository gameRepository)
         await _gameRepository.StartGame(game);
     }
 
-    public async Task SetGamePublic(string gameId)
+    public async Task SetGamePublicAndSetIcon(string gameId, string icon)
     {           
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
-        await _gameRepository.SetGamePublic(game);
+        await _gameRepository.SetGamePublicAndSetIcon(game, icon);
     }
 
     public async Task VoteOnGame(Voter voter)

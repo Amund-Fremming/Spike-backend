@@ -41,13 +41,14 @@
 - Generer ikoner for nivå
 - Scrolling evig eller sider
 - Legge til en plass der hvor spillere kan anngi iconet til spillet sitt
-- Koble opp søk
 
-# Backend
+## Backend
+
+- Må hente votes til bruker når games displayes slik at votes can lastes.
 
 ## Ytelsesoptimalisering
 
-- Legg til spinner der lasting kan ta tid, hindre bruker å spamme api knapepr
+- Når spill opprettes, bruk spinner, og gjør det umulig å spamme apiet.
 - Legg til transaksjoner så ikke samme spill kan lages av to
 
 ## Finishing touches
