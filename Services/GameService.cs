@@ -75,9 +75,8 @@ public class GameService(GameRepository gameRepository)
         return await _gameRepository.DoesGameExist(gameId);
     }
 
-    public async Task<ICollection<Game>> SearchForGame(string searchString)
+    public async Task<ICollection<Game>> SearchForGames(string searchString)
     {
-        // TODO
-        return null;   
+        return await _gameRepository.SearchForGames(searchString);
     }
 }

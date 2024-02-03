@@ -92,4 +92,12 @@ public class GameRepository(AppDbContext context)
     {
         return await _context.Games.AnyAsync(g => g.GameId == gameId);
     }
+
+    public async Task<ICollection<Game>> SearchForGames(string searchString)
+    {
+        return await _context.Games
+            .Where(g => g.GameId.Contains(searchString))
+            .Take(25)
+            .ToListAsync();
+    }
 }

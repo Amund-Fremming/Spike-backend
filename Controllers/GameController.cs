@@ -147,6 +147,24 @@ public class GameController(GameService gameService, QuestionService questionSer
         }
     }
 
+    [HttpGet("searchgames")]
+    public async Task<ActionResult> SearchForGames([FromQuery] string searchString)
+    {
+        try
+        {
+            ICollection<Game> result = await _gameService.SearchForGames(searchString);
+            return Ok(result);
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
     [HttpPost("adddevice")]
     public async Task<ActionResult> AddDevice([FromBody] string deviceId)
     {
