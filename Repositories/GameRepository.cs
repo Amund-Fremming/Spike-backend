@@ -25,6 +25,7 @@ public class GameRepository(AppDbContext context)
             .OrderByDescending(g => g.Score)
             .Take(15)
             .Select(g => g.Game)*/
+            .Take(40)
             .ToListAsync();
     }
 

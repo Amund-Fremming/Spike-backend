@@ -45,9 +45,6 @@
 
 # Backend
 
-- fullfør søk api
-- Set max antall Games som hentes per søk, også første!
-
 ## Ytelsesoptimalisering
 
 - Legg til spinner der lasting kan ta tid, hindre bruker å spamme api knapepr
@@ -55,7 +52,8 @@
 
 ## Finishing touches
 
-- Input validering!
+- Søk sorteres etter rating
+- Input validering
 - Refaktorer frontend
 - Refaktorer backend og legg til error handling!!
 
