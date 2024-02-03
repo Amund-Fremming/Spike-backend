@@ -21,6 +21,23 @@ namespace backend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Models.Device", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("UserDeviceId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Devices");
+                });
+
             modelBuilder.Entity("Models.Game", b =>
                 {
                     b.Property<string>("GameId")
@@ -78,8 +95,9 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("UserDeviceId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserDeviceId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("Vote")
                         .HasColumnType("boolean");

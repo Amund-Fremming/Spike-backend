@@ -8,6 +8,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Game> Games { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<Voter> Voters { get; set; }
+    public DbSet<Device> Devices { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,5 +30,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(v => v.Game)
             .WithMany(g => g.Voters)
             .HasForeignKey(v => v.GameId);
+
+        modelBuilder.Entity<Device>()
+            .HasKey(d => d.Id);
     }
 }
