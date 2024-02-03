@@ -65,6 +65,16 @@ public class GameService(GameRepository gameRepository)
         }
     }
 
+    public async Task<bool> HaveGameStarted(string gameId)
+    {
+        return await _gameRepository.HaveGameStarted(gameId);   
+    }
+
+    public async Task<bool> DoesGameExist(string gameId)
+    {
+        return await _gameRepository.DoesGameExist(gameId);
+    }
+
     public async Task<ICollection<Game>> SearchForGame(string searchString)
     {
         // TODO

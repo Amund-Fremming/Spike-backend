@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Models;
-using Data;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 
@@ -9,23 +8,22 @@ namespace Controllers;
 
 [ApiController]
 [Route("spike/games")]
-public class GameController(GameService gameService, QuestionService questionService, DeviceRepository deviceRepo, AppDbContext context) : ControllerBase
+public class GameController(GameService gameService, QuestionService questionService, DeviceRepository deviceRepo) : ControllerBase
 {
     public readonly GameService _gameService = gameService;
     public readonly QuestionService _questionService = questionService;
-    public readonly AppDbContext _context = context;
     public readonly DeviceRepository _deviceRepo = deviceRepo;
 
     [HttpGet("gamestarted")]
     public async Task<ActionResult<bool>> HaveGameStarted([FromQuery] string gameId)
     {
-        return await _context.Games.AnyAsync(g => g.GameId == gameId && g.GameStarted);
+        return await _gameService.HaveGameStarted(gameId);
     }
 
     [HttpGet("gameexists")]
     public async Task<ActionResult<bool>> DoesGameExist([FromQuery] string gameId)
     {
-        return await _context.Games.AnyAsync(g => g.GameId == gameId);
+        return await _gameService.DoesGameExist(gameId);
     }
 
     [HttpGet("gamesbyrating")]

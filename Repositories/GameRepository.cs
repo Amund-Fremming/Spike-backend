@@ -82,4 +82,14 @@ public class GameRepository(AppDbContext context)
         return await _context.Voters
             .AnyAsync(v => v.GameId == gameId && v.UserDeviceId == deviceId);
     }
+
+    public async Task<bool> HaveGameStarted(string gameId)
+    {
+        return await _context.Games.AnyAsync(g => g.GameId == gameId && g.GameStarted);
+    }
+
+    public async Task<bool> DoesGameExist(string gameId)
+    {
+        return await _context.Games.AnyAsync(g => g.GameId == gameId);
+    }
 }

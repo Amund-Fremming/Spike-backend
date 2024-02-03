@@ -4,15 +4,16 @@ namespace Models;
 
 public class Game
 {
+    [Key]
     public string GameId { get; set; }
     public bool GameStarted { get; set; }
     public bool PublicGame { get; set; }
     public string IconImage { get; set; }
     public int NumberOfQuestions { get; set; }
-    public ICollection<Question?> Questions;
-    public ICollection<Voter?> Voters;
+    public ICollection<Question>? Questions;
+    public ICollection<Voter>? Voters;
 
-    public Game() {}
+    public Game() { GameId = ""; IconImage = "NICE"; }
 
     public Game(string gameId, bool gameStarted, bool publicGame, string iconImage, int numberOfQuestions)
     {   

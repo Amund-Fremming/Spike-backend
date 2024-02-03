@@ -8,7 +8,7 @@ public class Device {
     public long Id { get; set; }
     public string UserDeviceId { get; set; }
 
-    public Device() {}
+    public Device() { UserDeviceId = ""; }
 
     public Device(string userDeviceId) {
         UserDeviceId = userDeviceId;
