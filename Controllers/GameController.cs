@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Models;
-using Microsoft.EntityFrameworkCore;
 using Repositories;
 
 namespace Controllers;
@@ -41,8 +40,25 @@ public class GameController(GameService gameService, QuestionService questionSer
             return StatusCode(500, e.Message);
         }
     }
-    
 
+    [HttpGet("searchgames")]
+    public async Task<ActionResult> SearchForGames([FromQuery] string searchString)
+    {
+        try
+        {
+            ICollection<Game> result = await _gameService.SearchForGames(searchString);
+            return Ok(result);
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+    
     [HttpPost]
     public async Task<ActionResult> CreateGame([FromBody] Game newGame)
     {
@@ -62,6 +78,24 @@ public class GameController(GameService gameService, QuestionService questionSer
         catch(Exception e)
         {
             Console.WriteLine("JHer fanger vi");
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpPost("adddevice")]
+    public async Task<ActionResult> AddDevice([FromBody] string deviceId)
+    {
+        try
+        {
+            bool result = await _deviceRepo.AddDevice(deviceId);
+            return Ok(result);
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
             return StatusCode(500, e.Message);
         }
     }
@@ -118,60 +152,6 @@ public class GameController(GameService gameService, QuestionService questionSer
         {
             await _gameService.SetGamePublicAndSetIcon(gameId, icon);
             return Ok("Game Published!");
-        }
-        catch(KeyNotFoundException e)
-        {
-           return NotFound(e.Message);
-        }
-        catch(Exception e)
-        {
-            return StatusCode(500, e.Message);
-        }
-    }
-
-    [HttpPut("vote")]
-    public async Task<ActionResult> VoteOnGame([FromBody] Voter voter)
-    {
-        try
-        {
-            await _gameService.VoteOnGame(voter);
-            return Ok("Vote Submitted!");
-        }
-        catch(KeyNotFoundException e)
-        {
-           return NotFound(e.Message);
-        }
-        catch(Exception e)
-        {
-            return StatusCode(500, e.Message);
-        }
-    }
-
-    [HttpGet("searchgames")]
-    public async Task<ActionResult> SearchForGames([FromQuery] string searchString)
-    {
-        try
-        {
-            ICollection<Game> result = await _gameService.SearchForGames(searchString);
-            return Ok(result);
-        }
-        catch(KeyNotFoundException e)
-        {
-           return NotFound(e.Message);
-        }
-        catch(Exception e)
-        {
-            return StatusCode(500, e.Message);
-        }
-    }
-
-    [HttpPost("adddevice")]
-    public async Task<ActionResult> AddDevice([FromBody] string deviceId)
-    {
-        try
-        {
-            bool result = await _deviceRepo.AddDevice(deviceId);
-            return Ok(result);
         }
         catch(KeyNotFoundException e)
         {

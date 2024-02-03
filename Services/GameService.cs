@@ -3,9 +3,10 @@ using Repositories;
 
 namespace Services;
 
-public class GameService(GameRepository gameRepository)
+public class GameService(GameRepository gameRepository, VoteRepository voteRepository)
 {
     public readonly GameRepository _gameRepository = gameRepository;
+    public readonly VoteRepository _voteRepository = voteRepository;
 
     public async Task<ICollection<Game>> GetPublicGamesByRating()
     {
@@ -45,24 +46,6 @@ public class GameService(GameRepository gameRepository)
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
         await _gameRepository.SetGamePublicAndSetIcon(game, icon);
-    }
-
-    public async Task VoteOnGame(Voter voter)
-    {
-        Game game = await _gameRepository.GetGameById(voter.GameId) ?? throw new KeyNotFoundException($"Game with ID {voter.GameId}, does not exist!");
-
-        
-
-        bool voterExistsForGame = await _gameRepository.DoesVoterExistForGame(voter.GameId, voter.UserDeviceId);
-
-        if(voterExistsForGame)
-        {
-            await _gameRepository.UpdateVoterForGame(voter.UserDeviceId, voter.GameId, voter.Vote);
-        }
-        else
-        {
-            await _gameRepository.CreateVoterForGame(voter);
-        }
     }
 
     public async Task<bool> HaveGameStarted(string gameId)

@@ -9,7 +9,7 @@ namespace Controllers;
 
 [ApiController]
 [Route("spike/questions")]
-public class Controller(QuestionService service, IHubContext<GameHub> hubContext) : ControllerBase
+public class QuestionController(QuestionService service, IHubContext<GameHub> hubContext) : ControllerBase
 {
     public readonly QuestionService _service = service;
     public readonly IHubContext<GameHub> _hubContext = hubContext;
