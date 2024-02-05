@@ -38,12 +38,12 @@
 
 ## Ytelsesoptimalisering
 
-- Fikse slik at votes oppdateres raskere i frontend
+- ( Fikse posisjonering på mascot, den er feil på ulike mobiler )
 
-- Spinner til create game
-- Spinner til start game
+- Ikke ha game finished, men done knapp
+- Kunne se input box når man skriver
+- Søk med enter
 
-- Fikse lazy loading på votes
 - Hvis ikke kontakt med backend, alert om ikke tilkoblet nettverk!
 - Ny splash screen som er lik og like stor som loading bilde
 
