@@ -7,3 +7,5 @@ libman install @microsoft/signalr@latest -p unpkg -d wwwroot/js/signalr --files 
 
 dotnet ef migrations add SecondCreate
 dotnet ef database update
+
+litt mer rosa!
