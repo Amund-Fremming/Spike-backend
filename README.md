@@ -43,6 +43,7 @@
 - Spinner til create game
 - Spinner til start game
 
+- Fikse lazy loading på votes
 - Hvis ikke kontakt med backend, alert om ikke tilkoblet nettverk!
 - Ny splash screen som er lik og like stor som loading bilde
 

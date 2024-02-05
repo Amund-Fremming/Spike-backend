@@ -24,12 +24,14 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<Question>()
             .HasOne(q => q.Game)
             .WithMany(g => g.Questions)
-            .HasForeignKey(q => q.GameId);
+            .HasForeignKey(q => q.GameId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Voter>()
             .HasOne(v => v.Game)
             .WithMany(g => g.Voters)
-            .HasForeignKey(v => v.GameId);
+            .HasForeignKey(v => v.GameId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Device>()
             .HasKey(d => d.Id);
