@@ -25,7 +25,7 @@ public class GameController(GameService gameService, QuestionService questionSer
         return await _gameService.DoesGameExist(gameId);
     }
 
-    [HttpGet("gamesbyrating")]
+    [HttpPost("gamesbyrating")]
     public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId) {
         try
         {
