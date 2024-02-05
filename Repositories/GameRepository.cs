@@ -5,9 +5,10 @@ using Models;
 
 namespace Repositories;
 
-public class GameRepository(AppDbContext context)
+public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 {
     public readonly AppDbContext _context = context;
+    public readonly VoteRepository _voteRepo = voteRepo;
 
     public async Task<Game?> GetGameById(string gameId)
     {
@@ -26,8 +27,8 @@ public class GameRepository(AppDbContext context)
             .Take(40)
             .ToListAsync();
 
-        games = CalculateUpvotePercentage(games);
-        games = AttachUsersVotes(games, deviceId);
+        games = await CalculateUpvotePercentage(games);
+        games = await AttachUsersVotes(games, deviceId);
 
         return games;
     }
@@ -93,14 +94,17 @@ public class GameRepository(AppDbContext context)
             .ToListAsync();
     }
 
-    public ICollection<Game> CalculateUpvotePercentage(ICollection<Game> games)
+    public async Task<ICollection<Game>> CalculateUpvotePercentage(ICollection<Game> games)
     {
         foreach(var game in games)
         {
-            if(game.Voters != null && game.Voters.Any())
+            ICollection<Voter> voters = await _voteRepo.GetVotersForGame(game.GameId); 
+
+            if(voters  != null && voters.Count > 0)
             {
-                int percentageUpvotes = (int) (game.Voters.Count(v => v.Vote) / game.Voters.Count * 100);
-                game.PercentageUpvotes = percentageUpvotes;
+                double percentageUpvotes = (double)voters.Count(v => v.Vote == 1) / voters.Count * 100;
+
+                game.PercentageUpvotes = (int)percentageUpvotes;
             } else {
                 game.PercentageUpvotes = 0;
             }
@@ -109,19 +113,21 @@ public class GameRepository(AppDbContext context)
         return games;
     }
 
-    public ICollection<Game> AttachUsersVotes(ICollection<Game> games, string deviceId)
+    public async Task<ICollection<Game>> AttachUsersVotes(ICollection<Game> games, string deviceId)
     {
         foreach(var game in games)
         {
-            if(game.Voters != null && game.Voters.Any())
+            bool userHaveVoted = await _voteRepo.DoesVoterExistForGame(game.GameId, deviceId);
+            ICollection<Voter> voters = null;
+            if(userHaveVoted)
             {
-                bool usersVote = game.Voters
-                    .Where(v => v.UserDeviceId == deviceId)
-                    .Select(v => v.Vote)
-                    .FirstOrDefault();
+                voters = await _voteRepo.GetVotersForGame(game.GameId); 
+            }
 
-                int votedValue = usersVote ? 1 : !usersVote ? 0 : 3;
-                game.UsersVote = votedValue;
+            if(voters != null && voters.Count > 0)
+            {
+                var userVote = voters.FirstOrDefault(v => v.UserDeviceId == deviceId);
+                game.UsersVote = userVote == null ? 2 : userVote.Vote;
             }
         }               
 

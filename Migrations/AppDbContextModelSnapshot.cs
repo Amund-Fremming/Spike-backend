@@ -106,8 +106,8 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("Vote")
-                        .HasColumnType("boolean");
+                    b.Property<int>("Vote")
+                        .HasColumnType("integer");
 
                     b.HasKey("VoterId");
 

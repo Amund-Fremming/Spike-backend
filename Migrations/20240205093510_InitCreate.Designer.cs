@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240205083829_InitCreate")]
+    [Migration("20240205093510_InitCreate")]
     partial class InitCreate
     {
         /// <inheritdoc />
@@ -109,8 +109,8 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("Vote")
-                        .HasColumnType("boolean");
+                    b.Property<int>("Vote")
+                        .HasColumnType("integer");
 
                     b.HasKey("VoterId");
 

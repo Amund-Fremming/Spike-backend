@@ -24,10 +24,10 @@ builder.Services.AddSignalR();
 var databaseConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 builder.Services.AddDbContext<Data.AppDbContext>(options =>
 {
-    // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
-    // options.UseNpgsql(connectionString);     // For testing locally
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");       // For testing locally
+    options.UseNpgsql(connectionString);     // For testing locally
     
-    options.UseNpgsql(databaseConnectionString);
+    // options.UseNpgsql(databaseConnectionString);
 });
 
 var app = builder.Build();

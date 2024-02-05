@@ -69,7 +69,7 @@ namespace backend.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserDeviceId = table.Column<string>(type: "text", nullable: false),
                     GameId = table.Column<string>(type: "text", nullable: false),
-                    Vote = table.Column<bool>(type: "boolean", nullable: false)
+                    Vote = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -14,7 +14,7 @@ public class VoteRepository(AppDbContext context) {
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateVoterForGame(string deviceId, string gameId, bool vote)
+    public async Task UpdateVoterForGame(string deviceId, string gameId, int vote)
     {
         Voter oldVoter = await _context.Voters
             .FirstOrDefaultAsync(v => v.GameId == gameId && v.UserDeviceId == deviceId) ?? throw new KeyNotFoundException($"Voter with gameId: {gameId}, and deviceId: {deviceId}, does not exist!");
@@ -27,5 +27,12 @@ public class VoteRepository(AppDbContext context) {
     {
         return await _context.Voters
             .AnyAsync(v => v.GameId == gameId && v.UserDeviceId == deviceId);
+    }
+
+    public async Task<ICollection<Voter>> GetVotersForGame(string gameId)
+    {
+        return await _context.Voters
+            .Where(v => v.GameId == gameId)
+            .ToListAsync();
     }
 }
