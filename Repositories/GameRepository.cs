@@ -29,7 +29,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
         games = await CalculateUpvotePercentage(games);
         games = await AttachUsersVotes(games, deviceId);
-        games = games.OrderBy(g => g.PercentageUpvotes).ToList();
+        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
 
         return games;
     }
