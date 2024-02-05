@@ -46,9 +46,6 @@
 - Hvis ikke kontakt med backend, alert om ikke tilkoblet nettverk!
 - Ny splash screen som er lik og like stor som loading bilde
 
-- Refaktorer frontend
-- Refaktorer backend
-
 ## Fix before appstore submit
 
 - Expo doctor (npx)

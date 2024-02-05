@@ -86,7 +86,6 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
         return await _context.Games.AnyAsync(g => g.GameId == gameId);
     }
 
-    // Denne må oppdatere votes!
     public async Task<ICollection<Game>> SearchForGames(string searchString, string deviceId)
     {
         ICollection<Game> games = await _context.Games
@@ -96,7 +95,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
         games = await CalculateUpvotePercentage(games);
         games = await AttachUsersVotes(games, deviceId);
-        games = games.OrderBy(g => g.PercentageUpvotes).ToList();
+        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
 
         return games;
     }
@@ -107,7 +106,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
         {
             ICollection<Voter> voters = await _voteRepo.GetVotersForGame(game.GameId); 
 
-            if(voters  != null && voters.Count > 0)
+            if(voters != null && voters.Count > 0)
             {
                 double percentageUpvotes = (double)voters.Count(v => v.Vote == 1) / voters.Count * 100;
 
