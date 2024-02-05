@@ -46,14 +46,14 @@ public class GameController(GameService gameService, QuestionService questionSer
         }
     }
 
-    [HttpGet("searchgames")]
-    public async Task<ActionResult> SearchForGames([FromQuery] string searchString)
+    [HttpPost("searchgames")]
+    public async Task<ActionResult> SearchForGames([FromQuery] string searchString, [FromBody] string deviceId)
     {
         string escapedSearchString = SecurityElement.Escape(searchString);
 
         try
         {
-            ICollection<Game> result = await _gameService.SearchForGames(escapedSearchString);
+            ICollection<Game> result = await _gameService.SearchForGames(escapedSearchString, deviceId);
             return Ok(result);
         }
         catch(KeyNotFoundException e)

@@ -38,11 +38,7 @@
 
 ## Ytelsesoptimalisering
 
-- Input validering
 - Fikse slik at votes oppdateres raskere i frontend
-
-- Oppdatere søk medoden
-- Søk sorteres etter rating
 
 - Spinner til create game
 - Spinner til start game

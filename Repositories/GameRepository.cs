@@ -29,6 +29,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
         games = await CalculateUpvotePercentage(games);
         games = await AttachUsersVotes(games, deviceId);
+        games = games.OrderBy(g => g.PercentageUpvotes).ToList();
 
         return games;
     }
@@ -86,12 +87,18 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
     }
 
     // Denne må oppdatere votes!
-    public async Task<ICollection<Game>> SearchForGames(string searchString)
+    public async Task<ICollection<Game>> SearchForGames(string searchString, string deviceId)
     {
-        return await _context.Games
+        ICollection<Game> games = await _context.Games
             .Where(g => g.GameId.Contains(searchString))
             .Take(25)
             .ToListAsync();
+
+        games = await CalculateUpvotePercentage(games);
+        games = await AttachUsersVotes(games, deviceId);
+        games = games.OrderBy(g => g.PercentageUpvotes).ToList();
+
+        return games;
     }
 
     public async Task<ICollection<Game>> CalculateUpvotePercentage(ICollection<Game> games)
