@@ -91,7 +91,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
     {
         ICollection<Game> games = await _context.Games
             .Where(g => g.GameId.Contains(searchString))
-            .Take(25)
+            .Take(40)
             .ToListAsync();
 
         games = await CalculateUpvotePercentage(games);
