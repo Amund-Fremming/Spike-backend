@@ -39,13 +39,8 @@
 ## Ytelsesoptimalisering
 
 - ( Fikse posisjonering på mascot, den er feil på ulike mobiler )
-
-- Ikke ha game finished, men done knapp
 - Kunne se input box når man skriver
-- Søk med enter
-
-- Hvis ikke kontakt med backend, alert om ikke tilkoblet nettverk!
-- Ny splash screen som er lik og like stor som loading bilde
+- Lage profil, med egne spill.
 
 ## Fix before appstore submit
 
