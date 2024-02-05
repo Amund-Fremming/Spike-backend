@@ -8,9 +8,9 @@ public class GameService(GameRepository gameRepository, VoteRepository voteRepos
     public readonly GameRepository _gameRepository = gameRepository;
     public readonly VoteRepository _voteRepository = voteRepository;
 
-    public async Task<ICollection<Game>> GetPublicGamesByRating()
+    public async Task<ICollection<Game>> GetPublicGamesByRating(string deviceId)
     {
-        return await _gameRepository.GetPublicGamesByRating();
+        return await _gameRepository.GetPublicGamesByRating(deviceId);
     }
 
     public async Task CreateGame(Game newGame)

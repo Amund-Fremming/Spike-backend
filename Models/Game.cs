@@ -10,6 +10,8 @@ public class Game
     public bool PublicGame { get; set; }
     public string IconImage { get; set; }
     public int NumberOfQuestions { get; set; }
+    public int? PercentageUpvotes { get; set; }
+    public int? UsersVote { get; set; }
     public ICollection<Question>? Questions;
     public ICollection<Voter>? Voters;
 

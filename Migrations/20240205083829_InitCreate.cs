@@ -32,7 +32,9 @@ namespace backend.Migrations
                     GameStarted = table.Column<bool>(type: "boolean", nullable: false),
                     PublicGame = table.Column<bool>(type: "boolean", nullable: false),
                     IconImage = table.Column<string>(type: "text", nullable: false),
-                    NumberOfQuestions = table.Column<int>(type: "integer", nullable: false)
+                    NumberOfQuestions = table.Column<int>(type: "integer", nullable: false),
+                    PercentageUpvotes = table.Column<int>(type: "integer", nullable: true),
+                    UsersVote = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {

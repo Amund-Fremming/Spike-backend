@@ -26,10 +26,10 @@ public class GameController(GameService gameService, QuestionService questionSer
     }
 
     [HttpGet("gamesbyrating")]
-    public async Task<ActionResult<ICollection<Game>>> GetGamesSorted() {
+    public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId) {
         try
         {
-            return Ok(await _gameService.GetPublicGamesByRating());
+            return Ok(await _gameService.GetPublicGamesByRating(deviceId));
         }
         catch(KeyNotFoundException e)
         {
