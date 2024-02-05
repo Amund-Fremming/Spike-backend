@@ -36,34 +36,22 @@
 
 # Spike - TODO
 
-## Backend
-
-- Må hente votes til bruker når games displayes slik at votes can lastes.
-  1. Hente votes med gameId:
-     - Alle kort vil spamme apiet
-     - Må iterere gjennom alle voters for å finne om bruker har stemt i hvert card
-  2. Hente games med sine votes som ett objekt
-     - Utrolig mye data som må renderes i frontend
-     - Må iterere gjennom alle voters for å finne om bruker har stemt i hvert card
-  3. Oppdatere en count når votes registreres
-     - Mye transaksjoner, muligens bottleneck
-     - Risikerer noen votes i,ke blir registrert, men ytelsen er bedre (Kasnkje verdt det)
-     - Bruke enkelt API for å finne ut om bruker har stemt.
-
 ## Ytelsesoptimalisering
 
-- Når spill opprettes, bruk spinner, og gjør det umulig å spamme apiet.
-- Legg til transaksjoner så ikke samme spill kan lages av to
+- Input validering
+- Fikse slik at votes oppdateres raskere i frontend
 
-## Finishing touches
+- Oppdatere søk medoden
+- Søk sorteres etter rating
+
+- Spinner til create game
+- Spinner til start game
 
 - Hvis ikke kontakt med backend, alert om ikke tilkoblet nettverk!
 - Ny splash screen som er lik og like stor som loading bilde
 
-- Søk sorteres etter rating
-- Input validering
 - Refaktorer frontend
-- Refaktorer backend og legg til error handling!!
+- Refaktorer backend
 
 ## Fix before appstore submit
 

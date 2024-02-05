@@ -13,6 +13,7 @@ public class VoteController(VoteService voteService) : ControllerBase
     [HttpPost]
     public async Task<ActionResult> VoteOnGame([FromBody] Voter voter)
     {
+        // Escape string, validere
         try
         {
             await _voteService.VoteOnGame(voter);

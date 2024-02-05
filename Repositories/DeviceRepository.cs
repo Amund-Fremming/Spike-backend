@@ -10,6 +10,7 @@ public class DeviceRepository(AppDbContext context) {
 
     public async Task<bool> AddDevice(string deviceId) 
     {
+        // Escape string, validere
         await using(var transaction = await _context.Database.BeginTransactionAsync())
         {
             try

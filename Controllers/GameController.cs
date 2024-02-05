@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using Models;
 using Repositories;
+using System.Security;
 
 namespace Controllers;
 
@@ -16,20 +17,24 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpGet("gamestarted")]
     public async Task<ActionResult<bool>> HaveGameStarted([FromQuery] string gameId)
     {
-        return await _gameService.HaveGameStarted(gameId);
+        string escapedGameId = SecurityElement.Escape(gameId);
+        return await _gameService.HaveGameStarted(escapedGameId);
     }
 
     [HttpGet("gameexists")]
     public async Task<ActionResult<bool>> DoesGameExist([FromQuery] string gameId)
     {
-        return await _gameService.DoesGameExist(gameId);
+        string escapedGameId = SecurityElement.Escape(gameId);
+        return await _gameService.DoesGameExist(escapedGameId);
     }
 
     [HttpPost("gamesbyrating")]
     public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId) {
+        string escapedDeviceId = SecurityElement.Escape(deviceId);
+
         try
         {
-            return Ok(await _gameService.GetPublicGamesByRating(deviceId));
+            return Ok(await _gameService.GetPublicGamesByRating(escapedDeviceId));
         }
         catch(KeyNotFoundException e)
         {
@@ -44,9 +49,11 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpGet("searchgames")]
     public async Task<ActionResult> SearchForGames([FromQuery] string searchString)
     {
+        string escapedSearchString = SecurityElement.Escape(searchString);
+
         try
         {
-            ICollection<Game> result = await _gameService.SearchForGames(searchString);
+            ICollection<Game> result = await _gameService.SearchForGames(escapedSearchString);
             return Ok(result);
         }
         catch(KeyNotFoundException e)
@@ -62,6 +69,8 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpPost]
     public async Task<ActionResult> CreateGame([FromBody] Game newGame)
     {
+        newGame.GameId = SecurityElement.Escape(newGame.GameId);
+
         try
         {
             await _gameService.CreateGame(newGame);
@@ -85,31 +94,12 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpPost("adddevice")]
     public async Task<ActionResult> AddDevice([FromBody] string deviceId)
     {
+        string escapedDeviceId = SecurityElement.Escape(deviceId);  
+
         try
         {
-            bool result = await _deviceRepo.AddDevice(deviceId);
+            bool result = await _deviceRepo.AddDevice(escapedDeviceId);
             return Ok(result);
-        }
-        catch(KeyNotFoundException e)
-        {
-           return NotFound(e.Message);
-        }
-        catch(Exception e)
-        {
-            return StatusCode(500, e.Message);
-        }
-    }
-
-    [HttpDelete]
-    public async Task<ActionResult> DeleteGame([FromBody] string gameId)
-    {
-        if(String.IsNullOrEmpty(gameId))
-            return BadRequest("Input invalid!");
-
-        try
-        {
-            await _gameService.DeleteGame(gameId);
-            return Ok("Game Deleted!");
         }
         catch(KeyNotFoundException e)
         {
@@ -124,12 +114,14 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpPut("startgame")]
     public async Task<ActionResult> StartGame([FromBody] string gameId)
     {
+        string escapedGameId = SecurityElement.Escape(gameId);  
+        
         if(String.IsNullOrEmpty(gameId))
             return BadRequest("Input Invalid!");
 
         try
         {
-            await _gameService.StartGame(gameId);
+            await _gameService.StartGame(escapedGameId);
             return Ok("Game started!");
         }
         catch(KeyNotFoundException e)
@@ -145,12 +137,15 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpPut("publishgame")]
     public async Task<ActionResult> PublishGame([FromBody] string icon, [FromQuery]string gameId)
     {
+        string escapedGameId = SecurityElement.Escape(gameId);
+        string escapedIcon = SecurityElement.Escape(icon);
+
         if(String.IsNullOrEmpty(gameId) || String.IsNullOrEmpty(icon))
             return BadRequest("Input invalid!");
 
         try
         {
-            await _gameService.SetGamePublicAndSetIcon(gameId, icon);
+            await _gameService.SetGamePublicAndSetIcon(escapedGameId, escapedIcon);
             return Ok("Game Published!");
         }
         catch(KeyNotFoundException e)
