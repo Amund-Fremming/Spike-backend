@@ -19,6 +19,9 @@ jobs:
           dotnet-version: "8.x"
           include-prerelease: true
 
+      - name: List all project and solution files
+        run: Get-ChildItem -Path . -Recurse -Include *.csproj, *.sln | ForEach-Object { Write-Host $_.FullName }
+
       - name: Build with dotnet
         run: dotnet build ./backend.csproj --configuration Release
 
