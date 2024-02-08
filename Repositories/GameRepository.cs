@@ -1,6 +1,7 @@
 using Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Models;
 
 namespace Repositories;
@@ -136,6 +137,44 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
                 game.UsersVote = userVote == null ? 2 : userVote.Vote;
             }
         }               
+
+        return games;
+    }
+
+    public async Task<ICollection<Game>> GetLikedGames(string deviceId)
+    {
+        ICollection<Game?> games = await _context.Voters
+            .Where(v => v.UserDeviceId == deviceId && v.Vote == 1)
+            .Select(v => v.Game)
+            .Where(g => g.CreatorId != deviceId)
+            .ToListAsync();
+        
+        if(games.Count == 0)
+        {
+            return games;
+        }
+
+        games = await CalculateUpvotePercentage(games);
+        games = await AttachUsersVotes(games, deviceId);
+        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
+
+        return games;
+    }
+
+    public async Task<ICollection<Game>> GetCreatedGames(string deviceId)
+    {
+        ICollection<Game> games = await _context.Games
+            .Where(g => g.CreatorId == deviceId)
+            .ToListAsync();
+
+        if(games.Count == 0)
+        {
+            return games;
+        }
+
+        games = await CalculateUpvotePercentage(games);
+        games = await AttachUsersVotes(games, deviceId);
+        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
 
         return games;
     }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240205093510_InitCreate")]
+    [Migration("20240208064447_InitCreate")]
     partial class InitCreate
     {
         /// <inheritdoc />
@@ -45,6 +45,9 @@ namespace backend.Migrations
             modelBuilder.Entity("Models.Game", b =>
                 {
                     b.Property<string>("GameId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatorId")
                         .HasColumnType("text");
 
                     b.Property<bool>("GameStarted")

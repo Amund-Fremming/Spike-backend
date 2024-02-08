@@ -36,11 +36,12 @@
 
 # Spike - TODO
 
-## Ytelsesoptimalisering
+## FIKS!
 
-- ( Fikse posisjonering på mascot, den er feil på ulike mobiler )
 - Kunne se input box når man skriver
-- Lage profil, med egne spill.
+- SE: fungerer apiet til å sjekke om deviceId fungerer i prod
+- Reload alle fetch om man voter, slik at de oppdateres likt på alle sider
+- Gameid med lengde 9 eller 10 blir stygt når det vises
 
 ## Fix before appstore submit
 

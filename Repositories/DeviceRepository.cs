@@ -10,7 +10,6 @@ public class DeviceRepository(AppDbContext context) {
 
     public async Task<bool> AddDevice(string deviceId) 
     {
-        // Escape string, validere
         await using(var transaction = await _context.Database.BeginTransactionAsync())
         {
             try
@@ -36,5 +35,17 @@ public class DeviceRepository(AppDbContext context) {
                 throw;
             }
         }
+    }
+
+    public async Task<Device?> GetDeviceById(string deviceId)
+    {
+        return await _context.Devices
+            .FirstOrDefaultAsync(d => d.UserDeviceId == deviceId);
+    }
+
+    public async Task<bool> DoesDeviceExist(string deviceId)
+    {
+        return await _context.Devices
+            .AnyAsync(d => d.UserDeviceId == deviceId);
     }
 }

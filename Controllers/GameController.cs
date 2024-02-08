@@ -28,6 +28,44 @@ public class GameController(GameService gameService, QuestionService questionSer
         return await _gameService.DoesGameExist(escapedGameId);
     }
 
+    [HttpGet("likedgames")]
+    public async Task<ActionResult<ICollection<Game>>> GetLikedGames([FromQuery] string deviceId)
+    {
+        string escapedDeviceId = SecurityElement.Escape(deviceId);
+
+        try
+        {
+            return Ok(await _gameService.GetLikedGames(escapedDeviceId));
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet("usersgames")]
+    public async Task<ActionResult<ICollection<Game>>> GetCreatedGames([FromQuery] string deviceId)
+    {
+        string escapedDeviceId = SecurityElement.Escape(deviceId);
+
+        try
+        {
+            return Ok(await _gameService.GetCreatedGames(escapedDeviceId));
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
     [HttpPost("gamesbyrating")]
     public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId) {
         string escapedDeviceId = SecurityElement.Escape(deviceId);
@@ -70,6 +108,7 @@ public class GameController(GameService gameService, QuestionService questionSer
     public async Task<ActionResult> CreateGame([FromBody] Game newGame)
     {
         newGame.GameId = SecurityElement.Escape(newGame.GameId);
+        newGame.CreatorId = SecurityElement.Escape(newGame.CreatorId);
 
         try
         {
@@ -99,6 +138,26 @@ public class GameController(GameService gameService, QuestionService questionSer
         try
         {
             bool result = await _deviceRepo.AddDevice(escapedDeviceId);
+            return Ok(result);
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpPost("deviceexists")]
+    public async Task<ActionResult> DoesDeviceExist([FromQuery] string deviceId)
+    {
+        string escapedDeviceId = SecurityElement.Escape(deviceId);  
+
+        try
+        {
+            bool result = await _deviceRepo.DoesDeviceExist(escapedDeviceId);
             return Ok(result);
         }
         catch(KeyNotFoundException e)

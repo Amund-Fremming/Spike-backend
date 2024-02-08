@@ -44,6 +44,9 @@ namespace backend.Migrations
                     b.Property<string>("GameId")
                         .HasColumnType("text");
 
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("text");
+
                     b.Property<bool>("GameStarted")
                         .HasColumnType("boolean");
 
