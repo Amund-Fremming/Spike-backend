@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy ASP.Net Core app to Azure Web App - Trike
 
 on:
@@ -17,9 +14,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2 # Updated to v2
         with:
-          dotnet-version: '8.x'
+          dotnet-version: "8.x"
           include-prerelease: true
 
       - name: Build with dotnet
@@ -38,19 +35,17 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      
+
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v1 # Consider checking if there's a newer version
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_183E8B416B364E2ABE333372FCBCA106 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_951F6441F69941F19E8B20BE1EB219E4 }}
@@ -58,9 +53,8 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v2 # Ensure this is the latest or check for a new version
         with:
-          app-name: 'Trike'
-          slot-name: 'Production'
+          app-name: "Trike"
+          slot-name: "Production"
           package: .
-          
