@@ -6,13 +6,13 @@
 
 - Super enkel og liten spørsmål applikasjon.
 - Her man man opprette, bli med i spill, legge til spørsmål og publisere spillet sitt.
-- Har brukt ASP.NET som backend som hostes hos Azure
-- React native som frontend
+- Har brukt ASP.NET som backend som hostes hos Azure.
+- React native som frontend.
 
 ### Fokus
 
-- Få appen på Appstore
-- Håndtere race conditions
+- Få appen på Appstore.
+- Håndtere race conditions.
 
 ### Hva har jeg lært
 
