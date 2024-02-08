@@ -18,14 +18,38 @@ public class GameController(GameService gameService, QuestionService questionSer
     public async Task<ActionResult<bool>> HaveGameStarted([FromQuery] string gameId)
     {
         string escapedGameId = SecurityElement.Escape(gameId);
-        return await _gameService.HaveGameStarted(escapedGameId);
+
+        try
+        {
+            return await _gameService.HaveGameStarted(escapedGameId);
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
     }
 
     [HttpGet("gameexists")]
     public async Task<ActionResult<bool>> DoesGameExist([FromQuery] string gameId)
     {
         string escapedGameId = SecurityElement.Escape(gameId);
-        return await _gameService.DoesGameExist(escapedGameId);
+
+        try
+        {
+            return await _gameService.DoesGameExist(escapedGameId);
+        }
+        catch(KeyNotFoundException e)
+        {
+           return NotFound(e.Message);
+        }
+        catch(Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
     }
 
     [HttpGet("likedgames")]

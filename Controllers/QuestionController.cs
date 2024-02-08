@@ -17,14 +17,10 @@ public class QuestionController(QuestionService service, IHubContext<GameHub> hu
     [HttpGet]
     public async Task<ActionResult> GetGameQuestions([FromQuery] string gameId)
     {
-        if(String.IsNullOrEmpty(gameId))
-            return BadRequest("Input invalid!");
-
-        string gameIdSaniticed;
+        string gameIdSaniticed = SecurityElement.Escape(gameId);
 
         try
         {
-            gameIdSaniticed = SecurityElement.Escape(gameId);
             var questions = await _service.GetGameQuestionsAsync(gameIdSaniticed);
             return Ok(questions);
         }
@@ -44,14 +40,11 @@ public class QuestionController(QuestionService service, IHubContext<GameHub> hu
         if(question.GameId == null || String.IsNullOrEmpty(question.QuestionStr))
             return BadRequest();
 
-        string gameIdEscaped;
-        string questionStringEscaped;
+        string gameIdEscaped = SecurityElement.Escape(question.GameId);
+        string questionStringEscaped = SecurityElement.Escape(question.QuestionStr);
 
         try
         {
-            gameIdEscaped = SecurityElement.Escape(question.GameId);
-            questionStringEscaped = SecurityElement.Escape(question.QuestionStr);
-
             Question saniticedQuestion = new Question(gameIdEscaped, questionStringEscaped);
             await _service.AddQuestionAsyncTransaction(saniticedQuestion);
 

@@ -68,10 +68,12 @@ public class GameService(GameRepository gameRepository, VoteRepository voteRepos
 
     public async Task<ICollection<Game>> SearchForGames(string searchString, string deviceId)
     {
+        Device devide = await _deviceRepository.GetDeviceById(deviceId) ?? throw new KeyNotFoundException($"Device with ID {deviceId}, does not exist!");
+
         return await _gameRepository.SearchForGames(searchString, deviceId);
     }
 
-    public async Task<ICollection<Game?>> GetLikedGames(string deviceId)
+    public async Task<ICollection<Game>> GetLikedGames(string deviceId)
     {
         Device devide = await _deviceRepository.GetDeviceById(deviceId) ?? throw new KeyNotFoundException($"Device with ID {deviceId}, does not exist!");
 

@@ -1,3 +1,4 @@
+using System.Security;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services;
@@ -13,7 +14,9 @@ public class VoteController(VoteService voteService) : ControllerBase
     [HttpPost]
     public async Task<ActionResult> VoteOnGame([FromBody] Voter voter)
     {
-        // Escape string, validere
+        voter.GameId = SecurityElement.Escape(voter.GameId);
+        voter.UserDeviceId = SecurityElement.Escape(voter.UserDeviceId);
+
         try
         {
             await _voteService.VoteOnGame(voter);

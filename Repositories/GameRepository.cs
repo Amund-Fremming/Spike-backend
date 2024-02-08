@@ -1,7 +1,5 @@
 using Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Models;
 
 namespace Repositories;
@@ -16,11 +14,6 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
         return await _context.Games.FindAsync(gameId);
     }
 
-    /// <summary>
-    /// Calculates the upvote procentage, and sets it to the game object.
-    /// Gets the users vote, and sets the users vote to the game property so we can display the suers votes in the frontend.
-    /// </summary>
-    /// <returns>A list of updated game objects</returns>
     public async Task<ICollection<Game>> GetPublicGamesByRating(string deviceId)
     {
         ICollection<Game> games = await _context.Games
@@ -125,17 +118,14 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
         foreach(var game in games)
         {
             bool userHaveVoted = await _voteRepo.DoesVoterExistForGame(game.GameId, deviceId);
-            ICollection<Voter> voters = null;
+            ICollection<Voter> voters = new List<Voter>();
             if(userHaveVoted)
             {
                 voters = await _voteRepo.GetVotersForGame(game.GameId); 
             }
 
-            if(voters != null && voters.Count > 0)
-            {
-                var userVote = voters.FirstOrDefault(v => v.UserDeviceId == deviceId);
-                game.UsersVote = userVote == null ? 2 : userVote.Vote;
-            }
+            var userVote = voters.FirstOrDefault(v => v.UserDeviceId == deviceId);
+            game.UsersVote = userVote == null ? 2 : userVote.Vote;
         }               
 
         return games;
@@ -143,12 +133,12 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
     public async Task<ICollection<Game>> GetLikedGames(string deviceId)
     {
-        ICollection<Game?> games = await _context.Voters
+        ICollection<Game> games = await _context.Voters
             .Where(v => v.UserDeviceId == deviceId && v.Vote == 1)
-            .Select(v => v.Game)
-            .Where(g => g.CreatorId != deviceId)
+            .Select(v => v.Game!)
+            .Where(g => g != null && g.CreatorId != deviceId)
             .ToListAsync();
-        
+
         if(games.Count == 0)
         {
             return games;
