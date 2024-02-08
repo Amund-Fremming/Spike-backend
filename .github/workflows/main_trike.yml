@@ -23,7 +23,7 @@ jobs:
         run: Get-ChildItem -Path . -Recurse -Include *.csproj, *.sln | ForEach-Object { Write-Host $_.FullName }
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build ./backend.csproj --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
