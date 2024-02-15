@@ -57,11 +57,11 @@ namespace backend.Migrations
                     b.Property<int>("NumberOfQuestions")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("PercentageUpvotes")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("PublicGame")
                         .HasColumnType("boolean");
+
+                    b.Property<int?>("Upvotes")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("UsersVote")
                         .HasColumnType("integer");

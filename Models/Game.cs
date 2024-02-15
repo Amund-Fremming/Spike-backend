@@ -11,7 +11,7 @@ public class Game
     public string IconImage { get; set; }
     public int NumberOfQuestions { get; set; }
     public string? CreatorId { get; set; }
-    public int? PercentageUpvotes { get; set; }
+    public int? Upvotes { get; set; }
     public int? UsersVote { get; set; }
     public ICollection<Question>? Questions;
     public ICollection<Voter>? Voters;

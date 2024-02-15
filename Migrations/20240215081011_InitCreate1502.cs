@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class InitCreate : Migration
+    public partial class InitCreate1502 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,7 @@ namespace backend.Migrations
                     IconImage = table.Column<string>(type: "text", nullable: false),
                     NumberOfQuestions = table.Column<int>(type: "integer", nullable: false),
                     CreatorId = table.Column<string>(type: "text", nullable: true),
-                    PercentageUpvotes = table.Column<int>(type: "integer", nullable: true),
+                    Upvotes = table.Column<int>(type: "integer", nullable: true),
                     UsersVote = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240208064447_InitCreate")]
-    partial class InitCreate
+    [Migration("20240215081011_InitCreate1502")]
+    partial class InitCreate1502
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,11 +60,11 @@ namespace backend.Migrations
                     b.Property<int>("NumberOfQuestions")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("PercentageUpvotes")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("PublicGame")
                         .HasColumnType("boolean");
+
+                    b.Property<int?>("Upvotes")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("UsersVote")
                         .HasColumnType("integer");

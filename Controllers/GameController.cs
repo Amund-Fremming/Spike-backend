@@ -53,7 +53,7 @@ public class GameController(GameService gameService, QuestionService questionSer
     }
 
     [HttpGet("likedgames")]
-    public async Task<ActionResult<ICollection<Game>>> GetLikedGames([FromQuery] string deviceId)
+    public async Task<ActionResult<ICollection<Game>>> GetLikedGames([FromQuery] string deviceId) 
     {
         string escapedDeviceId = SecurityElement.Escape(deviceId);
 
@@ -72,7 +72,7 @@ public class GameController(GameService gameService, QuestionService questionSer
     }
 
     [HttpGet("usersgames")]
-    public async Task<ActionResult<ICollection<Game>>> GetCreatedGames([FromQuery] string deviceId)
+    public async Task<ActionResult<ICollection<Game>>> GetCreatedGames([FromQuery] string deviceId)       
     {
         string escapedDeviceId = SecurityElement.Escape(deviceId);
 
@@ -91,7 +91,7 @@ public class GameController(GameService gameService, QuestionService questionSer
     }
 
     [HttpPost("gamesbyrating")]
-    public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId) {
+    public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId) {       
         string escapedDeviceId = SecurityElement.Escape(deviceId);
 
         try

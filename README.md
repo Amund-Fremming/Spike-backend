@@ -34,13 +34,15 @@
 
 <hr>
 
-# Spike - TODO
+### Hvorfor tar det lang tid å hente games?
 
-## FIKS!
+1. Vi kaller på Game i datbasen etter spill
+2. For hvert spill, kaller vi på Voters i databasen
+3. For hvert spill, kaller vi på voters i databasen
+4. Så sorterer vi spillene.
 
-- Kunne se input box når man skriver
-- SE: fungerer apiet til å sjekke om deviceId fungerer i prod
+### Løsning?
 
-## Fix before appstore submit
-
-- Expo doctor (npx)
+1. Ikke kalkuler votes i GetGames men gjør det etter hver vote
+2. Lagre brukers votes i frontend, så slipper man å legge disse til i backend O(n) vs O(1);
+3. Sorter i getGames Linq

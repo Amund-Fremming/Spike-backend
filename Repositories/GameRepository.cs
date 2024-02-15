@@ -19,11 +19,10 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
         ICollection<Game> games = await _context.Games
             .Where(g => g.PublicGame == true)
             .Take(40)
+            .OrderByDescending(g => g.Upvotes)
             .ToListAsync();
 
-        games = await CalculateUpvotePercentage(games);
         games = await AttachUsersVotes(games, deviceId);
-        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
 
         return games;
     }
@@ -87,28 +86,8 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
             .Take(40)
             .ToListAsync();
 
-        games = await CalculateUpvotePercentage(games);
         games = await AttachUsersVotes(games, deviceId);
-        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
-
-        return games;
-    }
-
-    public async Task<ICollection<Game>> CalculateUpvotePercentage(ICollection<Game> games)
-    {
-        foreach(var game in games)
-        {
-            ICollection<Voter> voters = await _voteRepo.GetVotersForGame(game.GameId); 
-
-            if(voters != null && voters.Count > 0)
-            {
-                double percentageUpvotes = (double)voters.Count(v => v.Vote == 1) / voters.Count * 100;
-
-                game.PercentageUpvotes = (int)percentageUpvotes;
-            } else {
-                game.PercentageUpvotes = 0;
-            }
-        }
+        games = games.OrderByDescending(g => g.Upvotes).ToList();
 
         return games;
     }
@@ -117,15 +96,9 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
     {
         foreach(var game in games)
         {
-            bool userHaveVoted = await _voteRepo.DoesVoterExistForGame(game.GameId, deviceId);
-            ICollection<Voter> voters = new List<Voter>();
-            if(userHaveVoted)
-            {
-                voters = await _voteRepo.GetVotersForGame(game.GameId); 
-            }
-
-            var userVote = voters.FirstOrDefault(v => v.UserDeviceId == deviceId);
-            game.UsersVote = userVote == null ? 2 : userVote.Vote;
+            Voter? userHaveVoted = await _voteRepo.DoesVoterExistForGame(game.GameId, deviceId);
+            
+            game.UsersVote = userHaveVoted == null ? 3 : userHaveVoted.Vote;
         }               
 
         return games;
@@ -144,9 +117,8 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
             return games;
         }
 
-        games = await CalculateUpvotePercentage(games);
         games = await AttachUsersVotes(games, deviceId);
-        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
+        games = games.OrderByDescending(g => g.Upvotes).ToList();
 
         return games;
     }
@@ -162,9 +134,8 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
             return games;
         }
 
-        games = await CalculateUpvotePercentage(games);
         games = await AttachUsersVotes(games, deviceId);
-        games = games.OrderByDescending(g => g.PercentageUpvotes).ToList();
+        games = games.OrderByDescending(g => g.Upvotes).ToList();
 
         return games;
     }

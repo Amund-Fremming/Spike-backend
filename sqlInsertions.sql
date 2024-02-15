@@ -1,7 +1,7 @@
 INSERT INTO "Games"
-    ("GameId", "GameStarted", "PublicGame", "IconImage", "NumberOfQuestions", "CreatorId")
+    ("GameId", "GameStarted", "PublicGame", "IconImage", "NumberOfQuestions", "CreatorId", "Upvotes")
 VALUES
-    ('KICKSTARTER', true, true, 'EDGY', 129, 'Creator');
+    ('KICKSTARTER', true, true, 'EDGY', 129, 'Creator', 32);
 
 INSERT INTO "Questions"
     ("GameId", "QuestionStr")
@@ -165,40 +165,11 @@ VALUES
     ('KICKSTARTER', 'Hvem har mange soveplasser?'),
     ('KICKSTARTER', 'Hvem gifter seg med en som har gått på BI?');
 
-INSERT INTO "Voters"
-    ("UserDeviceId", "GameId", "Vote")
-VALUES 
-    ('device_1', 'KICKSTARTER', 1),
-    ('device_2', 'KICKSTARTER', 1),
-    ('device_3', 'KICKSTARTER', 1),
-    ('device_4', 'KICKSTARTER', 1),
-    ('device_5', 'KICKSTARTER', 1),
-    ('device_6', 'KICKSTARTER', 1),
-    ('device_7', 'KICKSTARTER', 1),
-    ('device_8', 'KICKSTARTER', 1),
-    ('device_9', 'KICKSTARTER', 1),
-    ('device_10', 'KICKSTARTER', 1),
-    ('device_11', 'KICKSTARTER', 1),
-    ('device_12', 'KICKSTARTER', 1),
-    ('device_13', 'KICKSTARTER', 1),
-    ('device_14', 'KICKSTARTER', 1),
-    ('device_15', 'KICKSTARTER', 1),
-    ('device_16', 'KICKSTARTER', 1),
-    ('device_17', 'KICKSTARTER', 1),
-    ('device_18', 'KICKSTARTER', 1),
-    ('device_19', 'KICKSTARTER', 0),
-    ('device_20', 'KICKSTARTER', 0),
-    ('device_21', 'KICKSTARTER', 0),
-    ('device_22', 'KICKSTARTER', 0),
-    ('device_23', 'KICKSTARTER', 0),
-    ('device_24', 'KICKSTARTER', 0),
-    ('device_25', 'KICKSTARTER', 0);
-
 
 INSERT INTO "Games"
-    ("GameId", "GameStarted", "PublicGame", "IconImage", "NumberOfQuestions", "CreatorId")
+    ("GameId", "GameStarted", "PublicGame", "IconImage", "NumberOfQuestions", "CreatorId", "Upvotes")
 VALUES
-    ('LETT VORS', true, true, 'DIRTY', 60, 'Creator');
+    ('LETT VORS', true, true, 'DIRTY', 60, 'Creator', 25);
 
 INSERT INTO "Questions"
     ("GameId", "QuestionStr")
@@ -269,41 +240,11 @@ VALUES
     ('LETT VORS', 'Hvem er minst kresen?'),
     ('LETT VORS', 'Hvem ble utestengt under en trekant?');    
 
-INSERT INTO "Voters"
-    ("UserDeviceId", "GameId", "Vote")
-VALUES 
-    ('device_1', 'LETT VORS', 1),
-    ('device_2', 'LETT VORS', 1),
-    ('device_3', 'LETT VORS', 1),
-    ('device_4', 'LETT VORS', 1),
-    ('device_5', 'LETT VORS', 1),
-    ('device_6', 'LETT VORS', 1),
-    ('device_7', 'LETT VORS', 1),
-    ('device_8', 'LETT VORS', 1),
-    ('device_9', 'LETT VORS', 1),
-    ('device_10', 'LETT VORS', 1),
-    ('device_11', 'LETT VORS', 1),
-    ('device_12', 'LETT VORS', 1),
-    ('device_13', 'LETT VORS', 1),
-    ('device_14', 'LETT VORS', 1),
-    ('device_15', 'LETT VORS', 1),
-    ('device_16', 'LETT VORS', 1),
-    ('device_17', 'LETT VORS', 1),
-    ('device_18', 'LETT VORS', 1),
-    ('device_19', 'LETT VORS', 1),
-    ('device_20', 'LETT VORS', 1),
-    ('device_21', 'LETT VORS', 1),
-    ('device_22', 'LETT VORS', 0),
-    ('device_23', 'LETT VORS', 0),
-    ('device_24', 'LETT VORS', 0),
-    ('device_25', 'LETT VORS', 0);
-
-
 
 INSERT INTO "Games"
-    ("GameId", "GameStarted", "PublicGame", "IconImage", "NumberOfQuestions", "CreatorId")
+    ("GameId", "GameStarted", "PublicGame", "IconImage", "NumberOfQuestions", "CreatorId", "Upvotes")
 VALUES
-    ('ICEBREAKER', true, true, 'EDGY', 42, 'Creator');
+    ('ICEBREAKER', true, true, 'EDGY', 42, 'Creator', 20);
 
 
 INSERT INTO "Questions"
@@ -354,31 +295,83 @@ VALUES
     ('ICEBREAKER', 'Har en fetish?');
 
 
-INSERT INTO "Voters"
-    ("UserDeviceId", "GameId", "Vote")
-VALUES 
-    ('device_1', 'ICEBREAKER', 1),
-    ('device_2', 'ICEBREAKER', 1),
-    ('device_3', 'ICEBREAKER', 1),
-    ('device_4', 'ICEBREAKER', 1),
-    ('device_5', 'ICEBREAKER', 1),
-    ('device_6', 'ICEBREAKER', 1),
-    ('device_7', 'ICEBREAKER', 1),
-    ('device_8', 'ICEBREAKER', 1),
-    ('device_9', 'ICEBREAKER', 1),
-    ('device_10', 'ICEBREAKER', 1),
-    ('device_11', 'ICEBREAKER', 1),
-    ('device_12', 'ICEBREAKER', 1),
-    ('device_13', 'ICEBREAKER', 1),
-    ('device_14', 'ICEBREAKER', 1),
-    ('device_15', 'ICEBREAKER', 1),
-    ('device_16', 'ICEBREAKER', 0),
-    ('device_17', 'ICEBREAKER', 0),
-    ('device_18', 'ICEBREAKER', 0),
-    ('device_19', 'ICEBREAKER', 0),
-    ('device_20', 'ICEBREAKER', 0),
-    ('device_21', 'ICEBREAKER', 0),
-    ('device_22', 'ICEBREAKER', 0),
-    ('device_23', 'ICEBREAKER', 0),
-    ('device_24', 'ICEBREAKER', 0),
-    ('device_25', 'ICEBREAKER', 0);
+INSERT INTO
+    "Devices"("Id", "UserDeviceId")
+VALUES
+    (11, '0v4cnqi2ufhyp7kj2mf3hf5jc'),
+    (12, '1wm9tk4tn4ckvv1uja9kgnzvd'),
+    (13, '0xezloj0tep0hl3qhaeese5b7'),
+    (14, 'tt88gmqwbddxx3uxqs99t5lfc'),
+    (15, 'a0lp267aupe16pu4zwt0qmjbp'),
+    (16, 'xfi3izh1aq94o47jycuvw4rh5'),
+    (17, 'tyg5dbn7xq3x9hfisnjcax6qb'),
+    (18, 'bda2khcohri49gvgebvti4zvx'),
+    (19, 'w37iefq673iod0a6y0hasy2q5'),
+    (20, 'x87sqxikyeagldabp0vpgh0iu'),
+    (21, '6x8koqbkzwzeqvunuqxb5b2oh'),
+    (22, 'ctlcj6z7x33wsjzkxn1y1qhii'),
+    (23, 'jo7611rg7s88un322luyy6x0t'),
+    (24, 'jy76kknox4hnmovpo8plal55j'),
+    (25, 'poo0ryodi4u8yth8finsc7xgn'),
+    (26, 'uuu76z4cqbrc73t0e9m5je0do'),
+    (27, 'gqx7kyk32n618wkmu9fdc5afb'),
+    (28, 'ujyc1ltc3nv4han5dhh1hkqdb'),
+    (29, 'jnpr4jbb7vugvrwccrabq2mtc'),
+    (30, '5jpqzaqsggusyrh9zaueykrgp'),
+    (31, 'ehn8mrogxa8wpjdo5a1cb1k5k'),
+    (32, '20wcojkvba2uvgqxlu370s3to'),
+    (33, '5asjwmqx7uhfr8c39fy0uc1hq'),
+    (34, 'zkehpf5hvi7pqzakhg9at3vlj'),
+    (35, '1jt6iv3gb9a63voh7z4t6pvdw'),
+    (36, 'cs5u4u1oufs37wtrt6qfvlcis'),
+    (37, 'bt1gcxm69ufdrvxdi2a6akeef'),
+    (38, 'dl62ttlpeahqs7r4s074qf7ei'),
+    (39, 'zzmf9q60o7jv1qa3t3t90giem'),
+    (40, '610z6sxlfuqa1bv9crxsf4vtc'),
+    (41, 'z8rb4ln07pjj11j53yp4q6xod'),
+    (42, 'ers6nabqhssqnlgf3mmbmntfr'),
+    (43, 'pld5f8jh4rpdt2zhsy7t82lgs'),
+    (44, 'fi7j5k3dlypfyxn9g0xwz25qo'),
+    (45, 'q7o3jz26s0fo3yrsm2q1nq4pi'),
+    (46, '0n67jqyjaggik62wxzdvbyo4r'),
+    (47, 'fnojfzh9jrrxy8a35wt00v2fj'),
+    (48, '8g5lxkx4yafp8up9l3h1erfrd'),
+    (49, 'th8j51eejwpv6vvsk5ir4crme'),
+    (50, 'haqgo3p9r4diad1stew64xvxt'),
+    (51, 'wodqphz1ltp9v23kkn7dj41nu'),
+    (52, 'hxneuuwii6yvkd3gj6024jt1d'),
+    (53, 'd1cwaruur7heudaw0ivi1x9w5'),
+    (54, 'pnjwy5zb34tdre2hdsu8xipxd'),
+    (55, '5wobdzmgdjc2c7kb7eo4yjirp'),
+    (56, 'mqodszbzbkgj7xfknavmfpvqy'),
+    (57, 'nwos7lrv254bcy6vjj78pnk0x'),
+    (58, 'c9491jypnkdgs2930jm3v8gwo'),
+    (59, 'icv1i67b3gznn1dqucql5e4a2'),
+    (60, 'scsq77nefwjeuy2mgc3iz9oa5'),
+    (61, 'zzcgpbcflev6bz85im6055myp'),
+    (62, 'bf1fie9qvcxkwzwcxghbaho5o'),
+    (63, 'yoc0dvwdygc0zwi2ebjp9wr0v'),
+    (64, 'g2ckpsgix5uqc9ztsdyn84m3a'),
+    (65, 'wdo1jq259j97u8qoxinuvqwk6'),
+    (66, '0rqz5s358vbltz1s8ot4moy0x'),
+    (67, 'nqifmue87pzip4476e1nts5h4'),
+    (68, 'dskufrge25g595r8mhafexk6o'),
+    (69, '0jky4a77kfmyyh079qqokujw6'),
+    (70, 'wlz372g6p2sn3y4u159kuorpm'),
+    (71, '4w70111v8hxzmz2d3qkdk39af'),
+    (72, '9xti509kiygpl8dab6fakmvq2'),
+    (73, '3r2qop4flg7lnk11qc9xz6r2m'),
+    (74, 'j9evwfwsy85ce2t9rc5p1c5m4'),
+    (75, 'agnz45kxk0stkmmb1fwbhnxat'),
+    (76, 'psog5k8wvcyaoql3dd4ozt496'),
+    (77, 'lh1vut0jt9ywgpcpfplw7nqto'),
+    (78, '2xv9n82l019bc6fehx7sew4j6'),
+    (79, 'tkbtoram5biio9yeci9ebtd86'),
+    (80, '6e82ghq1z0ua9d34ma9lsfvcc'),
+    (81, 'pqz9vf9q3l6uiawdpxrcw6iqa'),
+    (82, 'ent07zdtqe79wrfs1czd4xq4l'),
+    (83, 'u4rk2bnyxnxp4bekjhktkkiob'),
+    (84, 'aq2k8xh68ezl8669ljbrg6dq8'),
+    (85, 'qogwonqtgg2me5xvsz29mpp4h'),
+    (86, 'nwgpxc3irkwn92rgmnozt00nc'),
+    (87, 'xjkpk9mf7qrmcj91k2fz3arwq');

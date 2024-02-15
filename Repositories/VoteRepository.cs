@@ -12,6 +12,8 @@ public class VoteRepository(AppDbContext context) {
     {
         _context.Add(voter);
         await _context.SaveChangesAsync();
+
+        await UpdateGameWithVote(voter.GameId, voter.Vote);
     }
 
     public async Task UpdateVoterForGame(string deviceId, string gameId, int vote)
@@ -21,18 +23,34 @@ public class VoteRepository(AppDbContext context) {
 
         oldVoter.Vote = vote;
         await _context.SaveChangesAsync();
+
+        await UpdateGameWithVote(gameId, vote);
     }
 
-    public async Task<bool> DoesVoterExistForGame(string gameId, string deviceId)
+    public async Task UpdateGameWithVote(string gameId, int vote)
     {
-        return await _context.Voters
-            .AnyAsync(v => v.GameId == gameId && v.UserDeviceId == deviceId);
+        // Updates game here, rather than when fetching games for better user experience.
+        using(var transaction = _context.Database.BeginTransaction())
+        {
+            try
+            {
+                Game game = await _context.Games.FirstAsync(g => g.GameId == gameId);
+                int voteValue = vote == 0 ? - 1 : vote == 1 ? 1 : 0;
+
+                game.Upvotes += voteValue;
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
+        }
     }
 
-    public async Task<ICollection<Voter>> GetVotersForGame(string gameId)
+    public async Task<Voter?> DoesVoterExistForGame(string gameId, string deviceId)
     {
         return await _context.Voters
-            .Where(v => v.GameId == gameId)
-            .ToListAsync();
+            .FirstOrDefaultAsync(v => v.GameId == gameId && v.UserDeviceId == deviceId);
     }
 }
