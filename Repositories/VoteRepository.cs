@@ -11,7 +11,6 @@ public class VoteRepository(AppDbContext context) {
     public async Task CreateVoterForGame(Voter voter)
     {
         _context.Add(voter);
-        await _context.SaveChangesAsync();
 
         await UpdateGameWithVote(voter.GameId, voter.Vote);
     }
@@ -22,7 +21,6 @@ public class VoteRepository(AppDbContext context) {
             .FirstOrDefaultAsync(v => v.GameId == gameId && v.UserDeviceId == deviceId) ?? throw new KeyNotFoundException($"Voter with gameId: {gameId}, and deviceId: {deviceId}, does not exist!");
 
         oldVoter.Vote = vote;
-        await _context.SaveChangesAsync();
 
         await UpdateGameWithVote(gameId, vote);
     }
@@ -37,8 +35,10 @@ public class VoteRepository(AppDbContext context) {
                 Game game = await _context.Games.FirstAsync(g => g.GameId == gameId);
                 int voteValue = vote == 0 ? - 1 : vote == 1 ? 1 : 0;
 
-                game.Upvotes += voteValue;
+                game.Upvotes = game.Upvotes + voteValue;
                 await _context.SaveChangesAsync();
+
+                transaction.Commit();
             }
             catch(Exception)
             {
