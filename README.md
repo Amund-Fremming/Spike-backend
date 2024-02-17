@@ -33,16 +33,3 @@
 - Mer annimasjoner på mascot figurene
 
 <hr>
-
-### Hvorfor tar det lang tid å hente games?
-
-1. Vi kaller på Game i datbasen etter spill
-2. For hvert spill, kaller vi på Voters i databasen
-3. For hvert spill, kaller vi på voters i databasen
-4. Så sorterer vi spillene.
-
-### Løsning?
-
-1. Ikke kalkuler votes i GetGames men gjør det etter hver vote
-2. Lagre brukers votes i frontend, så slipper man å legge disse til i backend O(n) vs O(1);
-3. Sorter i getGames Linq
