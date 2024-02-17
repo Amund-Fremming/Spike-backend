@@ -21,7 +21,7 @@ public class VoteService(VoteRepository voteRepository, GameRepository gameRepos
 
         if(voterExistsForGame != null)
         {
-            await _voteRepository.UpdateVoterForGame(voter.UserDeviceId, voter.GameId,voter.Vote, voterExistsForGame);
+            await _voteRepository.UpdateVoterForGame(voter.UserDeviceId, voter.GameId,voter.Vote);
         }
         else
         {
