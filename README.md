@@ -1,7 +1,5 @@
 # Spike
 
-- [Figma](https://www.figma.com/file/oBgpl8HkiowbkUFe6HchFL/Untitled?node-id=0%3A1&mode=dev)
-
 ### Kort om appen
 
 - Super enkel og liten spørsmål applikasjon.
@@ -13,6 +11,7 @@
 
 - Få appen på Appstore.
 - Håndtere race conditions.
+- Lage oppdateringer basert på brukeres tilbakemeldinger
 
 ### Hva har jeg lært
 
