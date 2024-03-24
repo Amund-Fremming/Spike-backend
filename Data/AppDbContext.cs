@@ -9,11 +9,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Question> Questions { get; set; }
     public DbSet<Voter> Voters { get; set; }
     public DbSet<Device> Devices { get; set; }
+    public DbSet<SpinGame> SpinGames { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Game>()
             .HasKey(g => g.GameId);
+
+        modelBuilder.Entity<SpinGame>()
+            .HasKey(sg => sg.GameId);
 
         modelBuilder.Entity<Question>()
             .HasKey(q => q.Id);
