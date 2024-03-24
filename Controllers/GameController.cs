@@ -4,6 +4,8 @@ using Models;
 using Repositories;
 using System.Security;
 
+// This calss serves as a object for Spin games and regular games
+
 namespace Controllers;
 
 [ApiController]
