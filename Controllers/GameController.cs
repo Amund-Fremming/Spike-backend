@@ -241,4 +241,34 @@ public class GameController(GameService gameService, QuestionService questionSer
             return StatusCode(500, e.Message);
         }
     }
+
+    [HttpPost("{deviceId}")]
+    public async Task<ActionResult> AddPlayerToGame(string deviceId)
+    {
+        try
+        {
+            // add player to the game
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet("broadcastplayer{gameId}")]
+    public async Task<ActionResult> BroadcastChosenPlayer(string gameId)
+    {
+        try
+        {
+            // Get a random player from a game
+            // broadcast this player to all of the devices
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+
+    }
+
+
 }
