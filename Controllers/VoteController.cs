@@ -11,6 +11,7 @@ public class VoteController(VoteService voteService) : ControllerBase
 {
     public readonly VoteService _voteService = voteService;
 
+
     [HttpPost]
     public async Task<ActionResult> VoteOnGame([FromBody] Voter voter)
     {
@@ -22,11 +23,11 @@ public class VoteController(VoteService voteService) : ControllerBase
             await _voteService.VoteOnGame(voter);
             return Ok("Vote Submitted!");
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
