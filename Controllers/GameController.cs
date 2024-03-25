@@ -243,4 +243,50 @@ public class GameController(GameService gameService, QuestionService questionSer
             return StatusCode(500, e.Message);
         }
     }
+
+    [HttpPut("{gameId}")]
+    public async Task<ActionResult> UpdateGameStateThenBroadcast(string gameId, [FromBody] string state)
+    {
+        gameId = SecurityElement.Escape(gameId);
+        state = SecurityElement.Escape(state);
+
+        try
+        {
+            await _gameService.UpdateGameStateThenBroadcast(gameId, state);
+            // Update the gamestate
+            // Broadcast the new state, users render a new screen  based on the state
+            return Ok(state);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet("{gameId}")]
+    public async Task<ActionResult> GetRandomPlayerFromGameThenBroadcast(string gameId)
+    {
+        gameId = SecurityElement.Escape(gameId);
+
+        try
+        {
+            var randomPlayer = await _gameService.GetRandomPlayerFromGameThenBroadcast(gameId);
+            // Get a random player from the game, and broadcast their id
+            // All users will set a random timeout to turn red if its not their name, green if else
+            return Ok(randomPlayer);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
 }

@@ -21,7 +21,7 @@ public class GameService(GameRepository gameRepository, VoteRepository voteRepos
     {
         Game? game = await _gameRepository.GetGameById(newGame.GameId);
 
-        if(game != null)
+        if (game != null)
         {
             throw new InvalidDataException($"Game with ID {newGame.GameId}, already exists!");
         }
@@ -46,7 +46,7 @@ public class GameService(GameRepository gameRepository, VoteRepository voteRepos
     }
 
     public async Task SetGamePublicAndSetIcon(string gameId, string icon)
-    {           
+    {
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
         await _gameRepository.SetGamePublicAndSetIcon(game, icon);
@@ -56,13 +56,13 @@ public class GameService(GameRepository gameRepository, VoteRepository voteRepos
     {
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
 
-        return await _gameRepository.HaveGameStarted(gameId);   
+        return await _gameRepository.HaveGameStarted(gameId);
     }
 
     public async Task<bool> DoesGameExist(string gameId)
     {
         Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
-        
+
         return await _gameRepository.DoesGameExist(gameId);
     }
 
@@ -86,4 +86,19 @@ public class GameService(GameRepository gameRepository, VoteRepository voteRepos
 
         return await _gameRepository.GetCreatedGames(deviceId);
     }
+
+    public async Task UpdateGameStateThenBroadcast(string gameId, string state)
+    {
+        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
+
+        await _gameRepository.UpdateGameStateThenBroadcast(game, state);
+    }
+
+    public async Task<string> GetRandomPlayerFromGameThenBroadcast(string gameId)
+    {
+        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
+
+        return await _gameRepository.GetRandomPlayerFromGameThenBroadcast(gameId);
+    }
+
 }
