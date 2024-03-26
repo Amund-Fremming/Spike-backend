@@ -149,9 +149,8 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
     public async Task<string> GetRandomPlayerFromGameThenBroadcast(string gameId)
     {
-        List<Player> players = await _context.Games
-            .Where(g => g.GameId == gameId)
-            .Select(g => g.players)
+        List<Player> players = await _context.Players
+            .Where(p => p.GameId == gameId)
             .ToListAsync();
 
         Random random = new Random();

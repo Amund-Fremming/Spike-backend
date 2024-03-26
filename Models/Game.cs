@@ -16,7 +16,7 @@ public class Game
     public int? UsersVote { get; set; }
     public ICollection<Question>? Questions;
     public ICollection<Voter>? Voters;
-    public ICollection<Player>? players;
+    public ICollection<Player>? Players;
 
     public Game() { GameId = ""; IconImage = "NICE"; CreatorId = ""; }
 

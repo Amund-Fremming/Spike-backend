@@ -41,8 +41,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasKey(p => p.DeviceId);
 
         modelBuilder.Entity<Player>()
-            .HasOne(p =)
+            .HasOne(p => p.Game)
+            .WithMany(g => g.Players)
+            .HasForeignKey(p => p.GameId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-            // Lgg til riktige relatsioner, og oppdater player modellen  
+        // Lgg til riktige relatsioner, og oppdater player modellen  
     }
 }
