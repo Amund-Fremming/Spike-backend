@@ -12,9 +12,9 @@ public class GameHub : Hub
         _service = service;
     }
 
-    public async Task QuestionAdded(string gameId)
+    public async Task JoinGroup(string gameId)
     {
-        int count = _service.GetNumberOfQuestions(gameId);
-        await Clients.All.SendAsync("ReceiveQuestionCount", gameId, count);
+        await Groups.AddToGroupAsync(Context.ConnectionId, gameId);
     }
+
 }

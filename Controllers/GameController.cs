@@ -3,6 +3,8 @@ using Services;
 using Models;
 using Repositories;
 using System.Security;
+using Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 // This calss serves as a object for Spin games and regular games
 
@@ -10,11 +12,12 @@ namespace Controllers;
 
 [ApiController]
 [Route("spike/games")]
-public class GameController(GameService gameService, QuestionService questionService, DeviceRepository deviceRepo) : ControllerBase
+public class GameController(GameService gameService, QuestionService questionService, DeviceRepository deviceRepo, IHubContext<GameHub> hubContext) : ControllerBase
 {
     public readonly GameService _gameService = gameService;
     public readonly QuestionService _questionService = questionService;
     public readonly DeviceRepository _deviceRepo = deviceRepo;
+    public readonly IHubContext<GameHub> _hubContext = hubContext;
 
     [HttpGet("gamestarted")]
     public async Task<ActionResult<bool>> HaveGameStarted([FromQuery] string gameId)
@@ -253,8 +256,8 @@ public class GameController(GameService gameService, QuestionService questionSer
         try
         {
             await _gameService.UpdateGameStateThenBroadcast(gameId, state);
-            // Update the gamestate
-            // Broadcast the new state, users render a new screen  based on the state
+            await _hubContext.Clients.Group(gameId).SendAsync("GameState", state);
+
             return Ok(state);
         }
         catch (KeyNotFoundException e)
@@ -275,8 +278,8 @@ public class GameController(GameService gameService, QuestionService questionSer
         try
         {
             var randomPlayer = await _gameService.GetRandomPlayerFromGameThenBroadcast(gameId);
-            // Get a random player from the game, and broadcast their id
-            // All users will set a random timeout to turn red if its not their name, green if else
+            await _hubContext.Clients.Group(gameId).SendAsync("SelectedPlayer", randomPlayer);
+
             return Ok(randomPlayer);
         }
         catch (KeyNotFoundException e)
