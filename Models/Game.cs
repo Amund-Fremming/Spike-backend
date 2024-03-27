@@ -10,7 +10,7 @@ public class Game
     public bool PublicGame { get; set; }
     public string IconImage { get; set; }
     public int NumberOfQuestions { get; set; }
-    public string? GameState { get; set; }
+    // public string? GameState { get; set; }
     public string? CreatorId { get; set; }
     public int? Upvotes { get; set; }
     public int? UsersVote { get; set; }
