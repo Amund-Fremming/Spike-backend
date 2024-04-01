@@ -139,29 +139,4 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
         return games;
     }
-
-    public async Task UpdateGameStateThenBroadcast(Game game, string state)
-    {
-        /*
-        game.GameState = state;
-        await _context.SaveChangesAsync();
-        */
-
-    }
-
-    public async Task<string> GetRandomPlayerFromGameThenBroadcast(string gameId)
-    {
-        /*
-        List<Player> players = await _context.Players
-            .Where(p => p.GameId == gameId)
-            .ToListAsync();
-
-        Random random = new Random();
-        int randomIndex = random.Next(players.Count);
-
-        return players[randomIndex].DeviceId;
-        */
-        return "";
-    }
-
 }

@@ -9,19 +9,11 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = backend
 build_property.RootNamespace = backend
-<<<<<<< HEAD
 build_property.ProjectDir = /Users/amundfremming/Documents/projects/Spike-backend/
-=======
-build_property.ProjectDir = /home/amund/Documents/Projects/Spike-backend/
->>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-<<<<<<< HEAD
 build_property.MSBuildProjectDirectory = /Users/amundfremming/Documents/projects/Spike-backend
-=======
-build_property.MSBuildProjectDirectory = /home/amund/Documents/Projects/Spike-backend
->>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
 build_property._RazorSourceGeneratorDebug = 

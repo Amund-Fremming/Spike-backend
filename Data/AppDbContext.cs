@@ -9,7 +9,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Question> Questions { get; set; }
     public DbSet<Voter> Voters { get; set; }
     public DbSet<Device> Devices { get; set; }
-    public DbSet<Player> Players { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -36,16 +35,5 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         modelBuilder.Entity<Device>()
             .HasKey(d => d.Id);
-
-        modelBuilder.Entity<Player>()
-            .HasKey(p => p.DeviceId);
-
-        modelBuilder.Entity<Player>()
-            .HasOne(p => p.Game)
-            .WithMany(g => g.Players)
-            .HasForeignKey(p => p.GameId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        // Lgg til riktige relatsioner, og oppdater player modellen  
     }
 }

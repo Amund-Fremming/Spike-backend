@@ -87,18 +87,4 @@ public class GameService(GameRepository gameRepository, VoteRepository voteRepos
         return await _gameRepository.GetCreatedGames(deviceId);
     }
 
-    public async Task UpdateGameStateThenBroadcast(string gameId, string state)
-    {
-        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
-
-        await _gameRepository.UpdateGameStateThenBroadcast(game, state);
-    }
-
-    public async Task<string> GetRandomPlayerFromGameThenBroadcast(string gameId)
-    {
-        Game game = await _gameRepository.GetGameById(gameId) ?? throw new KeyNotFoundException($"Game with ID {gameId}, does not exist!");
-
-        return await _gameRepository.GetRandomPlayerFromGameThenBroadcast(gameId);
-    }
-
 }
