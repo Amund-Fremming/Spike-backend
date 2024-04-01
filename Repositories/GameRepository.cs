@@ -29,7 +29,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
     public async Task CreateGame(Game game)
     {
-        await using(var transaction = _context.Database.BeginTransaction())
+        await using (var transaction = _context.Database.BeginTransaction())
         {
             try
             {
@@ -38,7 +38,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
                 transaction.Commit();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 transaction.Rollback();
                 throw;
@@ -94,12 +94,12 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
 
     public async Task<ICollection<Game>> AttachUsersVotes(ICollection<Game> games, string deviceId)
     {
-        foreach(var game in games)
+        foreach (var game in games)
         {
             Voter? userHaveVoted = await _voteRepo.DoesVoterExistForGame(game.GameId, deviceId);
-            
+
             game.UsersVote = userHaveVoted == null ? 3 : userHaveVoted.Vote;
-        }               
+        }
 
         return games;
     }
@@ -112,7 +112,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
             .Where(g => g != null && g.CreatorId != deviceId)
             .ToListAsync();
 
-        if(games.Count == 0)
+        if (games.Count == 0)
         {
             return games;
         }
@@ -129,7 +129,7 @@ public class GameRepository(AppDbContext context, VoteRepository voteRepo)
             .Where(g => g.CreatorId == deviceId)
             .ToListAsync();
 
-        if(games.Count == 0)
+        if (games.Count == 0)
         {
             return games;
         }

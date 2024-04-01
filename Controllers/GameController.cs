@@ -3,16 +3,19 @@ using Services;
 using Models;
 using Repositories;
 using System.Security;
+using Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Controllers;
 
 [ApiController]
 [Route("spike/games")]
-public class GameController(GameService gameService, QuestionService questionService, DeviceRepository deviceRepo) : ControllerBase
+public class GameController(GameService gameService, QuestionService questionService, DeviceRepository deviceRepo, IHubContext<GameHub> hubContext) : ControllerBase
 {
     public readonly GameService _gameService = gameService;
     public readonly QuestionService _questionService = questionService;
     public readonly DeviceRepository _deviceRepo = deviceRepo;
+    public readonly IHubContext<GameHub> _hubContext = hubContext;
 
     [HttpGet("gamestarted")]
     public async Task<ActionResult<bool>> HaveGameStarted([FromQuery] string gameId)
@@ -23,11 +26,11 @@ public class GameController(GameService gameService, QuestionService questionSer
         {
             return await _gameService.HaveGameStarted(escapedGameId);
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
@@ -42,18 +45,18 @@ public class GameController(GameService gameService, QuestionService questionSer
         {
             return await _gameService.DoesGameExist(escapedGameId);
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
     }
 
     [HttpGet("likedgames")]
-    public async Task<ActionResult<ICollection<Game>>> GetLikedGames([FromQuery] string deviceId) 
+    public async Task<ActionResult<ICollection<Game>>> GetLikedGames([FromQuery] string deviceId)
     {
         string escapedDeviceId = SecurityElement.Escape(deviceId);
 
@@ -61,18 +64,18 @@ public class GameController(GameService gameService, QuestionService questionSer
         {
             return Ok(await _gameService.GetLikedGames(escapedDeviceId));
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
     }
 
     [HttpGet("usersgames")]
-    public async Task<ActionResult<ICollection<Game>>> GetCreatedGames([FromQuery] string deviceId)       
+    public async Task<ActionResult<ICollection<Game>>> GetCreatedGames([FromQuery] string deviceId)
     {
         string escapedDeviceId = SecurityElement.Escape(deviceId);
 
@@ -80,29 +83,30 @@ public class GameController(GameService gameService, QuestionService questionSer
         {
             return Ok(await _gameService.GetCreatedGames(escapedDeviceId));
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
     }
 
     [HttpPost("gamesbyrating")]
-    public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId) {       
+    public async Task<ActionResult<ICollection<Game>>> GetGamesSorted([FromBody] string deviceId)
+    {
         string escapedDeviceId = SecurityElement.Escape(deviceId);
 
         try
         {
             return Ok(await _gameService.GetPublicGamesByRating(escapedDeviceId));
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
@@ -118,16 +122,16 @@ public class GameController(GameService gameService, QuestionService questionSer
             ICollection<Game> result = await _gameService.SearchForGames(escapedSearchString, deviceId);
             return Ok(result);
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
     }
-    
+
     [HttpPost]
     public async Task<ActionResult> CreateGame([FromBody] Game newGame)
     {
@@ -137,17 +141,18 @@ public class GameController(GameService gameService, QuestionService questionSer
         try
         {
             await _gameService.CreateGame(newGame);
+
             return Ok("Game created!");
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(InvalidDataException) 
+        catch (InvalidDataException)
         {
             return BadRequest("GAME_EXISTS");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine("JHer fanger vi");
             return StatusCode(500, e.Message);
@@ -157,18 +162,18 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpPost("adddevice")]
     public async Task<ActionResult> AddDevice([FromBody] string deviceId)
     {
-        string escapedDeviceId = SecurityElement.Escape(deviceId);  
+        string escapedDeviceId = SecurityElement.Escape(deviceId);
 
         try
         {
             bool result = await _deviceRepo.AddDevice(escapedDeviceId);
             return Ok(result);
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
@@ -177,18 +182,18 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpPost("deviceexists")]
     public async Task<ActionResult> DoesDeviceExist([FromQuery] string deviceId)
     {
-        string escapedDeviceId = SecurityElement.Escape(deviceId);  
+        string escapedDeviceId = SecurityElement.Escape(deviceId);
 
         try
         {
             bool result = await _deviceRepo.DoesDeviceExist(escapedDeviceId);
             return Ok(result);
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
@@ -197,33 +202,36 @@ public class GameController(GameService gameService, QuestionService questionSer
     [HttpPut("startgame")]
     public async Task<ActionResult> StartGame([FromBody] string gameId)
     {
-        string escapedGameId = SecurityElement.Escape(gameId);  
-        
-        if(String.IsNullOrEmpty(gameId))
+        string escapedGameId = SecurityElement.Escape(gameId);
+
+        if (String.IsNullOrEmpty(gameId))
             return BadRequest("Input Invalid!");
 
         try
         {
             await _gameService.StartGame(escapedGameId);
+
+            // BROADCAST - game state til lobby
+            await _hubContext.Clients.All.SendAsync("SpinGameState", gameId, "WAITING");
             return Ok("Game started!");
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
             return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
     }
 
     [HttpPut("publishgame")]
-    public async Task<ActionResult> PublishGame([FromBody] string icon, [FromQuery]string gameId)
+    public async Task<ActionResult> PublishGame([FromBody] string icon, [FromQuery] string gameId)
     {
         string escapedGameId = SecurityElement.Escape(gameId);
         string escapedIcon = SecurityElement.Escape(icon);
 
-        if(String.IsNullOrEmpty(gameId) || String.IsNullOrEmpty(icon))
+        if (String.IsNullOrEmpty(gameId) || String.IsNullOrEmpty(icon))
             return BadRequest("Input invalid!");
 
         try
@@ -231,13 +239,28 @@ public class GameController(GameService gameService, QuestionService questionSer
             await _gameService.SetGamePublicAndSetIcon(escapedGameId, escapedIcon);
             return Ok("Game Published!");
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
     }
+
+    [HttpPost("leavegame")]
+    public async Task<ActionResult> LeaveGame([FromBody] string gameId)
+    {
+        try
+        {
+            await _hubContext.Clients.All.SendAsync("SpinGameState", gameId, "FINISHED");
+            return Ok("LGTM");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
 }

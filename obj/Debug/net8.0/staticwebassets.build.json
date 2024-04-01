@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cSKsCOiDIKHEZIoZnMEVka4QkTsL3hjQ2QCuxLtaNLI=",
+  "Hash": "DetP0Hz8d5zy+FEO5F386p7OmkuiZ5Ah3mMNFTufjhA=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "backend/wwwroot",
       "Source": "backend",
-      "ContentRoot": "/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/wwwroot/",
+      "ContentRoot": "/Users/amundfremming/Documents/projects/Spike-backend/wwwroot/",
       "BasePath": "_content/backend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/wwwroot/js/signalr/dist/browser/signalr.js",
+      "Identity": "/Users/amundfremming/Documents/projects/Spike-backend/wwwroot/js/signalr/dist/browser/signalr.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/AmundFremming/Personlig/Prosjekter/Spike-backend/wwwroot/",
+      "ContentRoot": "/Users/amundfremming/Documents/projects/Spike-backend/wwwroot/",
       "BasePath": "_content/backend",
       "RelativePath": "js/signalr/dist/browser/signalr.js",
       "AssetKind": "All",
