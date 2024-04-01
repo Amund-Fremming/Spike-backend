@@ -24,11 +24,11 @@ public class QuestionController(QuestionService service, IHubContext<GameHub> hu
             var questions = await _service.GetGameQuestionsAsync(gameIdSaniticed);
             return Ok(questions);
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
@@ -37,7 +37,7 @@ public class QuestionController(QuestionService service, IHubContext<GameHub> hu
     [HttpPost]
     public async Task<ActionResult> AddQuestion([FromBody] Question question)
     {
-        if(question.GameId == null || String.IsNullOrEmpty(question.QuestionStr))
+        if (question.GameId == null || String.IsNullOrEmpty(question.QuestionStr))
             return BadRequest();
 
         string gameIdEscaped = SecurityElement.Escape(question.GameId);
@@ -53,11 +53,11 @@ public class QuestionController(QuestionService service, IHubContext<GameHub> hu
 
             return Ok("Question added!");
         }
-        catch(KeyNotFoundException e)
+        catch (KeyNotFoundException e)
         {
-           return NotFound(e.Message);
+            return NotFound(e.Message);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }

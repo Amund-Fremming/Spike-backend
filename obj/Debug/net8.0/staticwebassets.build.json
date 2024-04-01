@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "DetP0Hz8d5zy+FEO5F386p7OmkuiZ5Ah3mMNFTufjhA=",
+=======
+  "Hash": "t+HXMmYbBGFzkMVLd7vglnImUYHw7ILQSrEwJslEQFg=",
+>>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -10,17 +14,28 @@
     {
       "Name": "backend/wwwroot",
       "Source": "backend",
+<<<<<<< HEAD
       "ContentRoot": "/Users/amundfremming/Documents/projects/Spike-backend/wwwroot/",
+=======
+      "ContentRoot": "/home/amund/Documents/Projects/Spike-backend/wwwroot/",
+>>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
       "BasePath": "_content/backend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
+<<<<<<< HEAD
       "Identity": "/Users/amundfremming/Documents/projects/Spike-backend/wwwroot/js/signalr/dist/browser/signalr.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/amundfremming/Documents/projects/Spike-backend/wwwroot/",
+=======
+      "Identity": "/home/amund/Documents/Projects/Spike-backend/wwwroot/js/signalr/dist/browser/signalr.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/amund/Documents/Projects/Spike-backend/wwwroot/",
+>>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
       "BasePath": "_content/backend",
       "RelativePath": "js/signalr/dist/browser/signalr.js",
       "AssetKind": "All",

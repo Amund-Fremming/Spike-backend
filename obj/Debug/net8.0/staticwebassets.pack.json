@@ -1,7 +1,11 @@
 {
   "Files": [
     {
+<<<<<<< HEAD
       "Id": "/Users/amundfremming/Documents/projects/Spike-backend/wwwroot/js/signalr/dist/browser/signalr.js",
+=======
+      "Id": "/home/amund/Documents/Projects/Spike-backend/wwwroot/js/signalr/dist/browser/signalr.js",
+>>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
       "PackagePath": "staticwebassets/js/signalr/dist/browser/signalr.js"
     },
     {

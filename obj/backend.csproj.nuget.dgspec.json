@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "/Users/amundfremming/Documents/projects/Spike-backend/backend.csproj": {}
   },
   "projects": {
@@ -15,6 +16,22 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/amundfremming/.nuget/NuGet/NuGet.Config"
+=======
+    "/home/amund/Documents/Projects/Spike-backend/backend.csproj": {}
+  },
+  "projects": {
+    "/home/amund/Documents/Projects/Spike-backend/backend.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/amund/Documents/Projects/Spike-backend/backend.csproj",
+        "projectName": "backend",
+        "projectPath": "/home/amund/Documents/Projects/Spike-backend/backend.csproj",
+        "packagesPath": "/home/amund/.nuget/packages/",
+        "outputPath": "/home/amund/Documents/Projects/Spike-backend/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/amund/.nuget/NuGet/NuGet.Config"
+>>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -80,7 +97,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.1/libexec/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "/home/linuxbrew/.linuxbrew/Cellar/dotnet/8.0.1/libexec/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+>>>>>>> fef40ec6766551b750ba0ef8bef5cb0c59c79faa
         }
       }
     }
