@@ -30,5 +30,6 @@
 
 - Flere bevegende elementer i bakgrunn som et romskip eller en meteor som flyr i bakgrunn av planeten
 - Mer annimasjoner på mascot figurene
+- CD/CD
 
 <hr>
