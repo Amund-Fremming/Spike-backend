@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +19,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "8.x"
+          dotnet-version: '8.x'
           include-prerelease: true
 
       - name: Build with dotnet
@@ -35,10 +35,10 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
-      name: "Production"
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
@@ -48,18 +48,19 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-
+      
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F02F7B185A26403595CF4B2E98DF3C9D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1667C23BB1FB49E685F671E40EB1BA5D }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6C662F2A4CF44C5683216EC82B9AFA09 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_49DFF90F652D44B489975FB3F6B72029 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2E5A2E9A0FB04308B3EBFD37CA4CBC09 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_99BC273281EB4C85A7AB524575ACF1F7 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "Trike"
-          slot-name: "Production"
+          app-name: 'Trike'
+          slot-name: 'Production'
           package: .
+          
